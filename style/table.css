@@ -1,0 +1,29 @@
+table {
+    padding: 0px
+}
+td {
+    padding: 0px
+}
+img {
+    width : 80px;
+    height : 80px;
+}
+.name {
+    font-size : 22px
+}
+
+[class^="lv"]{
+    font-size : 20px;
+    text-align: center;
+}
+
+.type{
+    font-size : 18px;
+    text-align: center;
+}
+
+.img{
+text-align: center; 
+vertical-align: middle;
+
+}
