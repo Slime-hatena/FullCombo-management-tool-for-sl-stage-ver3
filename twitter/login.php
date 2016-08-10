@@ -3,7 +3,7 @@ require_once dirname ( __FILE__ ) . "/../../../undefined/fcMgt4slStage.php";
 
 
 if ($_SERVER['SERVER_NAME'] == "localhost"){
-    $callback_url = 'http://localhost/FullCombo-management-tool-for-sl-stage-ver3/twitter/callback.php';
+    $callback_url = 'http://localhost/fcMgt4slStage/twitter/callback.php';
 }else{
     $callback_url = dirname(__FILE__) . '/callback.php';
 }
@@ -128,6 +128,13 @@ else
 session_start() ;
 session_regenerate_id( true ) ;
 $_SESSION['oauth_token_secret'] = $query['oauth_token_secret'] ;
+
+$logWrite = "response : " . $response . "
+header : " . $header . "
+oauth_token : " . $query['oauth_token'] . "
+oauth_token_secret : " .  $query['oauth_token_secret'];
+
+include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
 
 // ユーザーを認証画面へ飛ばす
 header( 'Location: https://api.twitter.com/oauth/authorize?oauth_token=' . $query['oauth_token'] ) ;

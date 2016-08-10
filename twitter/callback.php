@@ -6,6 +6,8 @@ require_once dirname ( __FILE__ ) . "/../../../undefined/fcMgt4slStage.php";
 if( isset( $_GET['oauth_token'] ) && !empty( $_GET['oauth_token'] ) && isset( $_GET['oauth_verifier'] ) && !empty( $_GET['oauth_verifier'] ) )
 {
 
+	$isSuccess = true;
+
 //[リクエストトークン・シークレット]をセッションから呼び出す
 session_start() ;
 $request_token_secret = $_SESSION['oauth_token_secret'] ;
@@ -94,9 +96,6 @@ curl_close( $curl ) ;
 $response = substr( $res1, $res2['header_size'] ) ;				// 取得したデータ(JSONなど)
 $header = substr( $res1, 0, $res2['header_size'] ) ;		// レスポンスヘッダー (検証に利用したい場合にどうぞ)
 
-// [cURL]ではなく、[file_get_contents()]を使うには下記の通りです…
-// $response = @file_get_contents( $request_url , false , stream_context_create( $context ) ) ;
-
 // 文字列を[&]で区切る
 $parameters = explode( "&" , $response ) ;
 
@@ -133,10 +132,19 @@ print_r($query);
 // 「キャンセル」をクリックして帰ってきた時
 elseif( isset( $_GET['denied'] ) && !empty( $_GET['denied'] ) )
 {
+	$isSuccess = false;
 	// エラーメッセージを出力して終了
-	echo '認証に失敗しました : Twitter連携を許可しなかったようです。<br><a href="http://yahoo.co.jp">bye</a>' ;
+	echo '認証に失敗しました : Twitter連携を許可しなかったようです。<br><a href="http://yahoo.co.jp">bye...</a>' ;
 
 }
 
 //ログに保存する処理
-
+$logWrite ="Success : " . $isSuccess . "
+response : " . $response . "
+header : " . $header . "
+oauth_token : " . $query['oauth_token'] . "
+oauth_token_secret : " . $query['oauth_token_secret'] . "
+user_id : " . $query['user_id'] . "
+screen_name : " . $query['screen_name'] . "
+";
+include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
