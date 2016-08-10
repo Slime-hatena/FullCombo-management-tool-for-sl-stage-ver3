@@ -45,3 +45,4 @@ Temporary Items
 #自分で追加したやつ
 admin/
 hidden/
+log/*.txt
