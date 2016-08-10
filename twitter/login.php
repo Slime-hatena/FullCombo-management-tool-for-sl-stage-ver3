@@ -1,11 +1,18 @@
 <?php
 require_once dirname ( __FILE__ ) . "/../../../undefined/fcMgt4slStage.php";
 
+//cookieの判定
+if (isset($_POST['useCookie'])){
+    $_SESSION['useCookie'] = true;
+}else{
+    $_SESSION['useCookie'] = false;
+}
+
 
 if ($_SERVER['SERVER_NAME'] == "localhost"){
     $callback_url = 'http://localhost/fcMgt4slStage/twitter/callback.php';
 }else{
-    $callback_url = dirname(__FILE__) . '/callback.php';
+    $callback_url = 'http://svr.aki-memo.net/fcMgt4slStage/twitter/callback.php';
 }
 
 $access_token_secret = '' ;
