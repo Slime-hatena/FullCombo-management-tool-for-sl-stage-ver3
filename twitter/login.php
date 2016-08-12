@@ -8,12 +8,7 @@ if (isset($_POST['useCookie'])){
     $_SESSION['useCookie'] = false;
 }
 
-
-if ($_SERVER['SERVER_NAME'] == "localhost"){
-    $callback_url = 'http://localhost/fcMgt4slStage/twitter/callback.php';
-}else{
-    $callback_url = 'http://svr.aki-memo.net/fcMgt4slStage/twitter/callback.php';
-}
+$callback_url = 'http://' . $_SERVER['SERVER_NAME']  . '/fcMgt4slStage/twitter/callback.php';
 
 $access_token_secret = '' ;
 $request_url = 'https://api.twitter.com/oauth/request_token' ;

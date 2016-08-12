@@ -16,5 +16,3 @@ print<<<EOF
 <input type="image" src="img/twitter_parts/sign-in-with-twitter-gray.png" alt="送信する">
 </form>
 EOF;
-
-

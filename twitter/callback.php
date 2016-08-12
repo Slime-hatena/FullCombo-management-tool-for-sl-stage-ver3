@@ -173,6 +173,22 @@ $_SESSION['_fcMgt4slStage'] = $sessionId;
 // エラー時に例外を発生させる（任意）
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+// 登録済みユーザーの処理
+
+$sql = "SELECT * FROM  `svrToolUser` WHERE  `id` = ?";
+$stmt=$pdo->prepare($sql);
+$res=$stmt->execute(
+array($query['user_id']));
+if ($res) {
+    // データがあった場合の処理
+    echo "登録済みのためデータを上書きします。<br>";
+    $sql = "DELETE FROM `svrToolUser` WHERE `svrToolUser`.`id` = ?";
+    $stmt=$pdo->prepare($sql);
+    $res=$stmt->execute(
+    array($query['user_id']));
+}
+
+
 $sql =  "INSERT INTO svrToolUser
 (id,name,session,cookie,oauth_token,oauth_token_secret)
 VALUES (?,?,?,?,?,?);";
@@ -190,33 +206,31 @@ $query['oauth_token_secret']
 if ($res) {
     echo "登録完了、ようこそ@" .$query['screen_name'] . " さん！<br>自動的にトップページに戻ります。";
     $logWrite ="Success : true
-response : " . $response . "
-header : " . $header . "
-oauth_token : " . $query['oauth_token'] . "
-oauth_token_secret : " . $query['oauth_token_secret'] . "
-user_id : " . $query['user_id'] . "
-screen_name : " . $query['screen_name'] . "
-
-cookie : " . $cookieId . "
-session : " . $sessionId . "
-";
-include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
+    response : " . $response . "
+    header : " . $header . "
+    oauth_token : " . $query['oauth_token'] . "
+    oauth_token_secret : " . $query['oauth_token_secret'] . "
+    user_id : " . $query['user_id'] . "
+    screen_name : " . $query['screen_name'] . "
+    
+    cookie : " . $cookieId . "
+    session : " . $sessionId . "
+    ";
+    include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
 }
 else {
     echo "登録に失敗しました。 管理者にお問い合わせください。";
-        $logWrite ="Success : false (sql関連のエラー)
-response : " . $response . "
-header : " . $header . "
-oauth_token : " . $query['oauth_token'] . "
-oauth_token_secret : " . $query['oauth_token_secret'] . "
-user_id : " . $query['user_id'] . "
-screen_name : " . $query['screen_name'] . "
-
-cookie : " . $cookieId . "
-session : " . $sessionId . "
-";
+    $logWrite ="Success : false (sql関連のエラー)
+    response : " . $response . "
+    header : " . $header . "
+    oauth_token : " . $query['oauth_token'] . "
+    oauth_token_secret : " . $query['oauth_token_secret'] . "
+    user_id : " . $query['user_id'] . "
+    screen_name : " . $query['screen_name'] . "
+    
+    cookie : " . $cookieId . "
+    session : " . $sessionId . "
+    ";
 }
 
 header("Refresh: 3; URL=../login.php");
-
-//todo 登録済みの時、insert処理をしないようにする
