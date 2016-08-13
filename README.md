@@ -6,11 +6,11 @@
 
 ## ライセンス
 ### FullCombo-management-tool-for-sl-stage-ver3
-This software is released under the MIT License, see LICENSE.
-MITライセンスを適用します。 詳しくはLICENSEをお読みください。
+This software is released under the MIT License, see LICENSE.  
+MITライセンスを適用します。 詳しくはLICENSEをお読みください。  
 
 ###  [jQuery v3.1.0](https://jquery.com/"jQuery")
-(c) jQuery Foundation | jquery.org/license
+(c) jQuery Foundation | jquery.org/license  
 
 ### [TwistOAuth](https://github.com/mpyw/TwistOAuth"TwistOAuth")
-Copyright (c) 2014, CertaiN All rights reserved.
+Copyright (c) 2014, CertaiN All rights reserved.  
