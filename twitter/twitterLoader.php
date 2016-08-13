@@ -2,7 +2,7 @@
 // this file is include only!
 // twitter関連処理 ユーザーロード用
 /*
-require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitterLoader.php");
+require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.php");
 ------------------------------------------------------------------------------------------------
 $consumer_key
 $consumer_secret
@@ -11,9 +11,9 @@ $oauth_token_secret
 $isLogin
 */
 
-require_once dirname ( __FILE__ ) . "/lib/TwistOAuth.phar";
-require_once dirname ( __FILE__ ) . "/../../undefined/fcMgt4slStage.php";
-require_once dirname ( __FILE__ ) . "/../../undefined/DSN.php";
+require_once $_SERVER['DOCUMENT_ROOT']  . "/fcMgt4slStage/lib/TwistOAuth.phar";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/../undefined/fcMgt4slStage.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/../undefined/DSN.php";
 session_start();
 
 $isLogin = false;
@@ -36,6 +36,8 @@ try {
   }elseif (isset($_COOKIE['_fcMgt4slStage'])){
     $sql = "SELECT * FROM  `svrToolUser` WHERE  `cookie` = ?";
     $key = $_COOKIE['_fcMgt4slStage'];
+  }else{
+      goto end;
   }
 
 
@@ -47,6 +49,8 @@ if ($res) {
     {
         $query = $p ;
     }
+
+$screen_name = $query['name'];
 $oauth_token = $query['oauth_token'];
 $oauth_token_secret = $query['oauth_token_secret'];
 $isLogin = true;
@@ -60,3 +64,5 @@ try {
     include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
     exit ("ユーザーデータを取得中にエラーが発生しました。管理者にお問い合わせください。");
 }
+
+end:

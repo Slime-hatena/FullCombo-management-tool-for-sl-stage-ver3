@@ -1,15 +1,15 @@
 table {
-    padding: 0px
+    padding: 0px;
 }
 td {
-    padding: 0px
+    padding: 10px 5px;
 }
 img {
     width : 80px;
     height : 80px;
 }
 .name {
-    font-size : 22px
+    font-size : 22px;
 }
 
 [class^="lv"]{
@@ -25,5 +25,7 @@ img {
 .img{
 text-align: center; 
 vertical-align: middle;
-
 }
+span.br { 
+    white-space: nowrap; 
+    }

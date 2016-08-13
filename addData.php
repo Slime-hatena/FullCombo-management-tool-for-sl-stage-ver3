@@ -1,97 +1,139 @@
 <?php
+require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.php");
 $json_music = file_get_contents("../slStageMusicDatabase/music.json");
 $json_music = mb_convert_encoding($json_music, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 $arr = json_decode($json_music, true);
+
+
+if (!$isLogin && false){
+    exit("このページはログインが必要です");
+}
+
 ?>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="style/bgTableMusic.php">
-</head>
-<body>
+  <html>
 
-  <form action="DataPost.php" id="main" method="post" name="main">
-    <p>
-      P名
-      <br> &ensp;
-      <input maxlength="10" name="name" size="20" type="text">
-      <br> Twitter
-      <br> &ensp;＠
-      <input maxlength="15" name="twitter" size="15" type="text" value="<?php if (isset ( $user->screen_name )) { echo $user->screen_name; } ?>">
-      <br> PRP
-      <br> &ensp;
-      <input maxlength="4" name="prp" size="4" type="text">
-      <br> PLv
-      <br> &ensp;
-      <input maxlength="4" name="plv" size="4" type="text">
-      <br> ゲームid
-      <br> &ensp;
-      <input maxlength="9" name="game_id" size="11" type="text">
-      <br> <span style="font-size: 85%"><b>PRPとPLv ゲームidは入力されていないと*に置き換わります。</b></span>
-    </p>
-    P Rank
-    <br> &ensp;
-    <select name="p_rank">
-      <option value="0">F : 見習いプロデューサー</option>
-      <option value="1">E : 駆け出しプロデューサー</option>
-      <option value="2">D : 新米プロデューサー</option>
-      <option value="3">C : 普通プロデューサー</option>
-      <option value="4">B : 中堅プロデューサー</option>
-      <option value="5">A : 敏腕プロデューサー</option>
-      <option value="6">S : 売れっ子プロデューサー</option>
-      <option value="7">SS : 超売れっ子プロデューサー</option>
-    </select>
+  <head>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" type="text/css" href="style/bgTableMusic.php">
+    <link rel="stylesheet" type="text/css" href="style/table.css">
+    <link rel="stylesheet" type="text/css" href="style/check.css">
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/checkAll.js"></script>
 
 
-    <table cellpadding="5" cellspacing="1" rules="cols">
-      <tr>
-        <th class="heading">-</th>
-        <td class="heading">Debut</td>
-        <td class="heading">Regular</td>
-        <td class="heading">Pro</td>
-        <td class="heading">Master</td>
-      </tr>
-      <tr>
-        <th class="heading">難易度ごとに全てチェック</th>
-        <td>
-          <input class="checkAll" id="Debut" type="checkbox">
-        </td>
-        <td>
-          <input class="checkAll" id="Regular" type="checkbox">
-        </td>
-        <td>
-          <input class="checkAll" id="Pro" type="checkbox">
-        </td>
-        <td>
-          <input class="checkAll" id="Master" type="checkbox">
-        </td>
-      </tr>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
 
- <?php
+  <body>
+
+    <form class="pure-form pure-form-aligned" action="DataPost.php" id="main" method="post" name="main">
+
+
+      <div class="pure-control-group">
+        <label for="name">プロデューサー名</label>
+        <input id="name" maxlength="10" name="name" size="20" type="text" placeholder="">
+      </div>
+
+      <div class="pure-control-group">
+        <label for="id">Twitter</label>
+        <input id="id" type="text" name="twitter" size="15" placeholder="@<?php echo $screen_name ?>" disabled>
+      </div>
+
+      <div class="pure-control-group">
+        <label for="gameid">ゲームID</label>
+        <input id="gameid" type="text" name="game_id" size="11" placeholder="123456789" disabled>
+      </div>
+
+      <div class="pure-control-group">
+        <label for="prp">PRP</label>
+        <input id="prp" type="text" maxlength="4" name="prp" size="4" placeholder="">
+      </div>
+
+      <div class="pure-control-group">
+        <label for="plv"><span class="br">プロデューサー</span><wbr><span class="br">レベル</span></label>
+        <input id="plv" type="text" maxlength="4" name="plv" size="4" placeholder="">
+      </div>
+
+      <div class="pure-control-group">
+        <label for="rank"><span class="br">プロデューサー</span>
+          <wbr><span class="br">ランク</span></label>
+        <select id="rank" name="rank" class="pure-input-1-1">
+          <option value="1">E : 駆け出しプロデューサー</option>
+          <option value="2">D : 新米プロデューサー</option>
+          <option value="3">C : 普通プロデューサー</option>
+          <option value="4">B : 中堅プロデューサー</option>
+          <option value="5">A : 敏腕プロデューサー</option>
+          <option value="6">S : 売れっ子プロデューサー</option>
+          <option value="7">SS : 超売れっ子プロデューサー</option>
+        </select>
+      </div>
+      </div>
+
+
+      <table cellpadding="5" cellspacing="1" rules="cols">
+        <tr>
+          <th class="heading">-</th>
+          <td class="heading">Debut</td>
+          <td class="heading">Regular</td>
+          <td class="heading">Pro</td>
+          <td class="heading">Master</td>
+        </tr>
+        <tr>
+          <th class="heading">難易度ごとに全てチェック</th>
+          <td>
+            <input class="checkAll music" id="Debut" type="checkbox">
+          </td>
+          <td>
+            <input class="checkAll music" id="Regular" type="checkbox">
+          </td>
+          <td>
+            <input class="checkAll music" id="Pro" type="checkbox">
+          </td>
+          <td>
+            <input class="checkAll music" id="Master" type="checkbox">
+          </td>
+        </tr>
+
+        <?php
 
 foreach ($arr as $key => $value) {
-    print<<<EOF
+    
+    echo <<<EOF
+    
     <tr>
     <th class="index" id="bg{$key}">
     <div class="wrapper">{$value['name']}</div>
     </th>
     <td>
-    <input class="Debut" id="{$key}_1" name="arr[]" type="checkbox" value="{$key}_1">
+    <input class="Debut music" id="{$key}_1" name="arr[]" type="checkbox" value="{$key}_1">
     </td>
     <td>
-    <input class="Regular" id="{$key}_2" name="arr[]" type="checkbox" value="{$key}_2">
+    <input class="Regular music" id="{$key}_2" name="arr[]" type="checkbox" value="{$key}_2">
     </td>
     <td>
-    <input class="Pro" id="{$key}_3" name="arr[]" type="checkbox" value="{$key}_3">
+    <input class="Pro music" id="{$key}_3" name="arr[]" type="checkbox" value="{$key}_3">
     </td>
     <td>
-    <input class="Master" id="{$key}_4" name="arr[]" type="checkbox" value="{$key}_4">
+    <input class="Master music" id="{$key}_4" name="arr[]" type="checkbox" value="{$key}_4">
     </td>
     </tr>
+
 EOF;
 }
-    
-    ?>
+?>
+      </table>
 
-    </table>
-    </body>
-    </html>
+&nbsp;ページ上部のメニューにある免責事項、プライバシーポリシーをよくお読みになって同意いただける場合のみご使用ください。
+      <div class="pure-controls">
+        <label for="cb" class="pure-checkbox">
+          <input id="cb" type="checkbox"> 同意します
+        </label>
+      </div>
+
+      <div class="pure-controls">
+        <button type="submit" class="pure-button pure-button-primary">送信</button>
+      </div>
+  </body>
+
+  </html>

@@ -160,7 +160,7 @@ try {
 if($_SESSION['useCookie'] = true){
     $cookieId = time() . "_" . mt_rand() .  "_" . $query['user_id'] . "_fcMgt4slStage";
     $cookieId = password_hash($cookieId, PASSWORD_DEFAULT, array('cost' => 10));
-    setcookie('_fcMgt4slStage', $cookieId ,time()+60+60*24*7,"/fcMgt4slStage/","aki-memo.net");
+    setcookie('_fcMgt4slStage', $cookieId ,time()+60+60*24*7,"/fcMgt4slStage/",$_SERVER['SERVER_NAME']);
 }else{
     $cookieId = null;
 }
