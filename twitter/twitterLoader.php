@@ -42,19 +42,17 @@ try {
 
 
 $stmt=$pdo->prepare($sql);
-$res=$stmt->execute(
-array($key));
-if ($res) {
-     foreach( $stmt as $p )
-    {
-        $query = $p ;
-    }
+$res=$stmt->execute(array($key));
+$query = $stmt->fetchAll()[0];
+
+// var_dump($query);
+
+if ($stmt->rowCount() === 1) {
 
 $screen_name = $query['name'];
 $oauth_token = $query['oauth_token'];
 $oauth_token_secret = $query['oauth_token_secret'];
 $isLogin = true;
-}
 
 try {
     $to = new TwistOAuth($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
@@ -64,5 +62,16 @@ try {
     include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
     exit ("ユーザーデータを取得中にエラーが発生しました。管理者にお問い合わせください。");
 }
+
+} elseif ($stmt->rowCount() >= 2){
+    echo "何故か複数件のユーザーデータを取得しています。<br>もう一度ログインしてください。";
+        $logWrite ="何故か複数件のユーザーデータを取得しています。
+    var_dump($stmt->fetchAll()) : " . var_dump($stmt->fetchAll());
+    include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
+
+     setcookie('_fcMgt4slStage', $cookieId ,time()-1,"/fcMgt4slStage/",$_SERVER['SERVER_NAME']);
+    $_SESSION = array();
+    session_destroy();
+} 
 
 end:
