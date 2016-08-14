@@ -1,4 +1,7 @@
 <?php 
+
+include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/header.php");
+
 print<<<EOF
 <p>
     ログインにはTwitterを使用します。<br>
@@ -16,3 +19,5 @@ print<<<EOF
 <input type="image" src="img/twitter_parts/sign-in-with-twitter-gray.png" alt="送信する">
 </form>
 EOF;
+
+include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");

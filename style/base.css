@@ -1,0 +1,322 @@
+/*===========================================
+clearfix
+===========================================*/
+
+.clearfix:before,
+.clearfix:after {
+	content: "";
+	display: block;
+	overflow: hidden;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+
+/*===========================================
+all
+===========================================*/
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	font-size: 14px;
+	line-height: 1.6;
+	color: #333333;
+	-webkit-text-size-adjust: 100%;
+}
+
+
+/*===========================================
+wapper
+===========================================*/
+
+#wrapper {
+	position: relative;
+}
+
+#contents {
+	padding: 20px;
+}
+
+#disable-layer {
+	width: 100%;
+	height: 100%;
+	display: none;
+	background: rgba(0, 0, 0, 0.3);
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 998;
+}
+
+
+/*===========================================
+header
+===========================================*/
+
+#header {
+	width: 100%;
+	padding: 10px;
+	background: #FFF;
+	display: table;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+	position: fixed;
+	top: 0;
+	z-index: 2;
+}
+
+#header .logo {
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 18px;
+}
+
+#header .right {
+	display: table-cell;
+	text-align: right;
+}
+
+#header .open {
+	padding: 10px 15px;
+	background: #000;
+	display: inline-block;
+	color: #FFF;
+	border-radius: 7px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
+/*===========================================
+global
+===========================================*/
+
+#global {
+	width: 280px;
+	height: 100%;
+	line-height: 1.2;
+	position: fixed;
+	top: 0;
+	left: 100%;
+	z-index: 999;
+	background: #FFF;
+	overflow-y: auto;
+}
+
+#global a {
+	color: #333;
+	text-decoration: none;
+}
+
+#global .headline {
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
+	color: #FFF;
+	background: #000;
+	font-weight: normal;
+	display: table;
+}
+
+#global .headline {
+	padding: 15px 10px;
+	display: block;
+	background: #000;
+	color: #FFF;
+}
+
+#global-menu li {
+	border-top: 1px solid #D9D9D0;
+}
+
+#global-menu li .parent {
+	padding: 15px 10px;
+	display: block;
+	background: #000;
+	color: #FFF;
+}
+
+#global-menu li a {
+	padding: 15px 10px;
+	display: block;
+	position: relative;
+}
+
+#global-menu > li > a:after {
+	content: '\f054';
+	margin-top: -7px;
+	position: absolute;
+	top: 50%;
+	right: 10px;
+}
+
+#global-menu ul li:first-child {
+	border-top: none;
+}
+
+#global-menu .children {
+	background: #F3F3F1;
+}
+
+#global-menu .children li {}
+
+#global-menu .children li .trigger {
+	padding: 15px 10px;
+	display: block;
+	position: relative;
+	cursor: pointer;
+}
+
+#global-menu .children li .trigger:after {
+	content: '\f078';
+	margin-top: -7px;
+	position: absolute;
+	top: 50%;
+	right: 10px;
+}
+
+#global-menu .children li .trigger.active {
+	background: #DDD;
+}
+
+#global-menu .children li .trigger.active:after {
+	content: '\f077';
+	margin-top: -7px;
+	position: absolute;
+	top: 50%;
+	right: 10px;
+}
+
+#global-menu .children li .target {
+	background: #FFF;
+	display: none;
+}
+
+#global-menu .children li .target.active {
+	display: block;
+}
+
+#global-menu .children li .target li a:after {
+	content: '\f054';
+	margin-top: -7px;
+	position: absolute;
+	top: 50%;
+	right: 10px;
+}
+
+#global-buttons {
+	padding: 10px;
+	border-top: 1px solid #D9D9D0;
+}
+
+#global-buttons a {
+	color: #FFF;
+}
+
+#global-buttons .btn-1 {
+	width: 48.5%;
+	float: left;
+}
+
+#global-buttons .btn-2 {
+	width: 48.5%;
+	float: right;
+}
+
+#global-buttons .btn-1 a,
+#global-buttons .btn-2 a {
+	padding: 15px 10px;
+	background: #000;
+	border-radius: 7px;
+	display: block;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+	color: #FFF;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+#global-pages li {
+	width: 50%;
+	float: left;
+	border-top: 1px solid #D9D9D0;
+	display: table;
+}
+
+#global-pages li a {
+	padding: 15px 20px 15px 10px;
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+}
+
+#global-pages li a:after {
+	content: '\f105';
+	position: absolute;
+	margin-top: -10px;
+	top: 50%;
+	right: 10px;
+	font-size: 20px;
+}
+
+#global-pages li:nth-child(odd) {
+	border-right: 1px solid #D9D9D0;
+}
+
+#global-close {
+	padding: 10px;
+	background: #000;
+}
+
+#global-close .close {
+	width: 180px;
+	margin: auto;
+	padding: 15px 10px;
+	background: #FFF;
+	display: block;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+
+/*===========================================
+transition
+===========================================*/
+
+#global,
+#wrapper {
+	transition: all 0.5s ease;
+}
+
+
+/*===========================================
+Font Awesome
+===========================================*/
+
+#global-menu > li > a:after,
+#global-menu .children li a:after,
+#global-menu .children li .trigger:after,
+#global-menu .children li .target li a:after,
+#global-pages li a:after {
+	font-family: 'FontAwesome';
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	float: left;
+	font-weight: normal;
+	font-style: normal;
+}

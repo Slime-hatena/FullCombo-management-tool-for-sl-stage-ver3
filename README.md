@@ -14,3 +14,8 @@ MITライセンスを適用します。 詳しくはLICENSEをお読みくださ
 
 ### [TwistOAuth](https://github.com/mpyw/TwistOAuth"TwistOAuth")
 Copyright (c) 2014, CertaiN All rights reserved.  
+
+### [Reset Stylesheet](html5doctor.com"Reset Stylesheet")
+v1.4  
+2009-07-27  
+Author: Richard Clark - http://richclarkdesign.com
