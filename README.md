@@ -8,18 +8,18 @@
 ### FullCombo-management-tool-for-sl-stage-ver3
 This software is released under the MIT License, see LICENSE.  
 
-###  [jQuery v3.1.0](https://jquery.com/"jQuery")
+###  [jQuery v3.1.0](https://jquery.com/)
 (c) jQuery Foundation | jquery.org/license  
 
-### [TwistOAuth](https://github.com/mpyw/TwistOAuth"TwistOAuth")
+### [TwistOAuth](https://github.com/mpyw/TwistOAuth)
 Copyright (c) 2014, CertaiN All rights reserved.  
 
-### [Reset Stylesheet](http://html5doctor.com"Reset Stylesheet")
+### [Reset Stylesheet](http://html5doctor.com)
 v1.4  
 2009-07-27  
 Author: Richard Clark - http://richclarkdesign.com
 
-### [Font Awesome](http://fontawesome.io/"font-awesome")
+### [Font Awesome](http://fontawesome.io/)
 "font-awesome" is lisenced under the SIL Open Font License 1.1  
 https://fortawesome.github.io/Font-Awesome  
 http://scripts.sil.org/OFL  
