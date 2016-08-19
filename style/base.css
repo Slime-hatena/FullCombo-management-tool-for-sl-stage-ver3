@@ -1,4 +1,12 @@
 /*===========================================
+<span class="br">こうやって </span><wbr><span class="br">使う</span>
+===========================================*/
+
+span.br { 
+    white-space: nowrap; 
+    }
+
+/*===========================================
 clearfix
 ===========================================*/
 
@@ -66,7 +74,8 @@ header
 #header {
 	width: 100%;
 	padding: 10px;
-	background: #FFF;
+	background: #0079C2;
+	color: #fff;
 	display: table;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 	position: fixed;
@@ -87,9 +96,9 @@ header
 
 #header .open {
 	padding: 10px 15px;
-	background: #000;
+	background: #fdfdfd;
 	display: inline-block;
-	color: #FFF;
+	color: #000;
 	border-radius: 7px;
 	text-decoration: none;
 	cursor: pointer;

@@ -23,7 +23,7 @@ try {
     PDO::ATTR_EMULATE_PREPARES => false
     ) );
 } catch ( PDOException $e ) {
-    $logWrite ="unSuccessful データベースの接続中にエラーが発生しました (userLoader)
+    $logWrite ="unSuccessful データベースの接続中にエラーが発生しました (twitterLoader)
     sqlServer : connection unsuccess" . $e->getMessage ();
     include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
     exit ("ユーザーデータを取得中にエラーが発生しました。管理者にお問い合わせください。");
