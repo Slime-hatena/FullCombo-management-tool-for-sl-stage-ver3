@@ -9,13 +9,22 @@
 This software is released under the MIT License, see LICENSE.  
 MITライセンスを適用します。 詳しくはLICENSEをお読みください。  
 
-###  [jQuery v3.1.0](https://jquery.com/"jQuery")
+###  [jQuery v3.1.0](https://jquery.com/)
 (c) jQuery Foundation | jquery.org/license  
 
-### [TwistOAuth](https://github.com/mpyw/TwistOAuth"TwistOAuth")
+### [TwistOAuth](https://github.com/mpyw/TwistOAuth)
 Copyright (c) 2014, CertaiN All rights reserved.  
 
-### [Reset Stylesheet](html5doctor.com"Reset Stylesheet")
+### [Reset Stylesheet](html5doctor.com)
 v1.4  
 2009-07-27  
 Author: Richard Clark - http://richclarkdesign.com
+
+### [Pure v0.6.0](http://purecss.io/)
+Copyright 2014 Yahoo! Inc. All rights reserved.  
+Licensed under the BSD License.  
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+
+### [normalize.css v^3.0](http://git.io/normalize)
+MIT License  
+Copyright (c) Nicolas Gallagher and Jonathan Neal

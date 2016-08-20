@@ -62,7 +62,7 @@ td {
 	font-weight: bold;
 }
 
-.wrapper {
+.tableWrapper {
 	background-color: rgba(255, 255, 255, 0.6);
 }
 

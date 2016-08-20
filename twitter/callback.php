@@ -125,8 +125,6 @@ elseif( isset( $_GET['denied'] ) && !empty( $_GET['denied'] ) )
 {
     // エラーメッセージを出力して終了
     echo '認証に失敗しました : Twitter連携を許可しなかったようです。<br><a href="http://yahoo.co.jp">bye...</a>' ;
-    $logWrite ="Success : false";
-    include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
     exit();
 }else{
     echo '認証に失敗しました : 不明なエラーです。';
@@ -175,21 +173,60 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // 登録済みユーザーの処理
 
-$sql = "SELECT * FROM  `svrToolUser` WHERE  `id` = ?";
+$sql = "SELECT * FROM  `svrtooluser` WHERE  `id` = ?";
 $stmt=$pdo->prepare($sql);
-$res=$stmt->execute(
-array($query['user_id']));
-if ($res) {
+$res=$stmt->execute(array($query['user_id']));
+$userCheck = $res;
+
+// var_dump($query);
+
+if ($stmt->rowCount() === 1) {
     // データがあった場合の処理
     echo "登録済みのためデータを上書きします。<br>";
-    $sql = "DELETE FROM `svrToolUser` WHERE `svrToolUser`.`id` = ?";
+    $sql = "DELETE FROM `svrtooluser` WHERE `svrtooluser`.`id` = ?";
     $stmt=$pdo->prepare($sql);
     $res=$stmt->execute(
     array($query['user_id']));
+}else{
+    //新規登録処理
+    $sql =  "INSERT INTO fcmgt4slstage (id) VALUES (?);";
+    $stmt=$pdo->prepare($sql);
+    $res1 =$stmt->execute(array($query['user_id']));
+
+    $sql =  "INSERT INTO fcmgtuser (id) VALUES (?);";
+    $stmt=$pdo->prepare($sql);
+    $res2 =$stmt->execute(array($query['user_id']));
+
+
+    if (!($res1) || !($res2)) {
+
+    $logWrite ="Success : false (sql関連のエラー 新規登録時)
+    response : " . $response . "
+    header : " . $header . "
+    oauth_token : " . $query['oauth_token'] . "
+    oauth_token_secret : " . $query['oauth_token_secret'] . "
+    user_id : " . $query['user_id'] . "
+    screen_name : " . $query['screen_name'] . "
+    
+    cookie : " . $cookieId . "
+    session : " . $sessionId . "
+    ";
+    include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
+  
+    exit("新規登録に失敗しました。 管理者にお問い合わせください。");
+    
+      }
+
+      //登録時間
+     $sql = 'UPDATE fcmgtuser SET tsreg = :state WHERE id = :id';
+    $stmt=$pdo->prepare($sql);
+    $res=$stmt->execute(array(":state" => time() , ":id" => $query['user_id']));
+
+
 }
 
 
-$sql =  "INSERT INTO svrToolUser
+$sql =  "INSERT INTO svrtooluser
 (id,name,session,cookie,oauth_token,oauth_token_secret)
 VALUES (?,?,?,?,?,?);";
 $stmt=$pdo->prepare($sql);
@@ -204,7 +241,13 @@ $query['oauth_token_secret']
 )
 );
 if ($res) {
-    echo "登録完了、ようこそ@" .$query['screen_name'] . " さん！<br>自動的にトップページに戻ります。";
+
+    //最終ログイン時間
+     $sql = 'UPDATE fcmgtuser SET tslast = :state WHERE id = :id';
+    $stmt=$pdo->prepare($sql);
+    $res=$stmt->execute(array(":state" => time() , ":id" => $query['user_id']));
+
+    echo "ログイン完了、ようこそ@" .$query['screen_name'] . " さん！<br>自動的にトップページに戻ります。";
     $logWrite ="Success : true
     response : " . $response . "
     header : " . $header . "
@@ -231,6 +274,7 @@ else {
     cookie : " . $cookieId . "
     session : " . $sessionId . "
     ";
+    include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
 }
 
-header("Refresh: 3; URL=../login.php");
+header("Refresh: 3; URL=../index.php");
