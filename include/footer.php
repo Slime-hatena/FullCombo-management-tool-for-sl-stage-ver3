@@ -6,14 +6,17 @@ print<<<EOF
 </div>
 
 <nav id="global">
-    <h1 class="headline">FullComboManagementTool<br>for sl-stage</h1>
+    <div class="headline">{$Version}</div>
     <ul id="global-menu">
         <li><a href="index.php">トップページ</a></li>
 		<li><a href="login.php">ログイン / ログアウト</a></li>
 		<li><a href="mypage.php">マイページ</a></li>
+        <li><a href="addData.php">データ登録</a></li>
+        <li><a href="fcRate.php">参考フルコンボレート</a></li>
+        <li><a href="change.php">更新履歴</a></li>   
         <li><a href="policy.php">免責事項・プライバシーポリシー</a></li>
         <li><a href="license.php">ライセンス</a></li>
-        <li><a href="fcRate.php">参考フルコンボレート</a></li>
+        <li><a href="help.php">使い方</a></li>
 
  
         <ul class="children">
@@ -35,8 +38,6 @@ print<<<EOF
             </div>
 </nav>
 
-</body>
 
-</html>
 
 EOF;
