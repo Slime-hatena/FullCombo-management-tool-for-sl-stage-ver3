@@ -1,17 +1,11 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/header.php");
+
 require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.php");
-
-if (isset($userid)){
-    $getUserid = $userid;
-    $useShortiD = false;
-    include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/getUserdata.php");
-}
-
-
 $json_music = file_get_contents("../slStageMusicDatabase/music.json");
 $json_music = mb_convert_encoding($json_music, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 $arr = json_decode($json_music, true);
+
 
 if (!$isLogin){
     echo "このページはログインが必要です";
@@ -19,18 +13,20 @@ if (!$isLogin){
     exit();
 }
 
+
+    
+
+
 ?>
 
-  <p>アカウントに各データを登録します。
-    <br>すべてを入力する必要はありません。
-    <br>非公開にしたいデータは空白のまま送信してください。</p>
+<p>アカウントに各データを登録します。<br>すべてを入力する必要はありません。<br>非公開にしたいデータは空白のまま送信してください。</p>
 
   <form class="pure-form pure-form-aligned" action="dataPost.php" id="main" method="post" name="main" enctype="multipart/form-data">
 
 
     <div class="pure-control-group">
       <label for="name">プロデューサー名</label>
-      <input id="name" maxlength="10" name="name" size="20" type="text" placeholder="" value="<?php echo $name ?>">
+      <input id="name" maxlength="10" name="name" size="20" type="text" placeholder="">
     </div>
 
     <div class="pure-control-group">
@@ -40,26 +36,26 @@ if (!$isLogin){
 
     <div class="pure-control-group">
       <label for="gameid">ゲームID</label>
-      <input id="gameid" type="text" name="gameid" maxlength="9" size="11" placeholder="" value="<?php echo $gameid ?>">
+      <input id="gameid" type="text" name="gameid" maxlength="9" size="11" placeholder="">
     </div>
 
-    <div class="pure-control-group">
+        <div class="pure-control-group">
       <label for="plv"><span class="br">プロデューサー</span>
         <wbr><span class="br">レベル</span></label>
-      <input id="plv" type="text" maxlength="4" name="plv" size="4" placeholder="" value="<?php echo $level ?>">
+      <input id="plv" type="text" maxlength="4" name="plv" size="4" placeholder="">
     </div>
 
     <div class="pure-control-group">
       <label for="prp">PRP</label>
-      <input id="prp" type="text" maxlength="4" name="prp" size="4" placeholder="" value="<?php echo $prp ?>">
+      <input id="prp" type="text" maxlength="4" name="prp" size="4" placeholder="">
     </div>
 
-    <div class="pure-control-group">
+            <div class="pure-control-group">
       <label for="cardid">名刺ID</label>
-      <input id="cardid" type="text" maxlength="10" name="cardid" size="11" placeholder="" value="<?php echo $cardid ?>">
+      <input id="cardid" type="text" maxlength="10" name="cardid" size="11" placeholder="">
     </div>
 
-    <div class="pure-control-group">
+                <div class="pure-control-group">
       <label for="cardsrc">名刺画像</label>
       <input type="file" id="cardsrc" name="cardsrc">
     </div>
@@ -88,11 +84,8 @@ if (!$isLogin){
     </div>
 
     <div class="pure-control-group">
-      <label for="bio">自己紹介
-        <br>(120文字)</label>
-      <textarea maxlength="120" id="bio" name="bio" placeholder="" rows="3" cols="25">
-        <?php echo $bio ?>
-      </textarea>
+      <label for="bio">自己紹介<br>(120文字)</label>
+      <textarea maxlength="120" id="bio" name="bio" placeholder="" rows="3" cols="25"></textarea>
     </div>
 
 
@@ -122,46 +115,30 @@ if (!$isLogin){
 
       <?php
 
-
 foreach ($arr as $key => $value) {
     
-    $k = $key . "_1," . $key . "_2," . $key . "_3," . $key . "_4";
-    $sql = "SELECT " . $k . " FROM  `fcmgt4slstage` WHERE  `id` = :id";
-    $stmt=$pdo->prepare($sql);
-    $res=$stmt->execute(array(":id" =>$getUserid));
-    $query = $stmt->fetchAll()[0];
-    
-    $doCheck = array();
-    for ($i=0; $i <= 3; $i++) {
-        if ($query[$i] == 1) {
-            $doCheck[$i] = "checked";
-        }else{
-            $doCheck[$i] = "";
-        }
-    }
-    
-    print<<<EOF
+    echo <<<EOF
     
     <tr>
     <th class="index" id="bg{$key}">
     <div class="tableWrapper">{$value['name']}</div>
     </th>
     <td>
-    <input class="Debut music" id="{$key}_1" name="arr[]" type="checkbox" value="{$key}_1" {$doCheck['0']}>
+    <input class="Debut music" id="{$key}_1" name="arr[]" type="checkbox" value="{$key}_1">
     </td>
     <td>
-    <input class="Regular music" id="{$key}_2" name="arr[]" type="checkbox" value="{$key}_2" {$doCheck[1]}>
+    <input class="Regular music" id="{$key}_2" name="arr[]" type="checkbox" value="{$key}_2">
     </td>
     <td>
-    <input class="Pro music" id="{$key}_3" name="arr[]" type="checkbox" value="{$key}_3" {$doCheck[2]}>
+    <input class="Pro music" id="{$key}_3" name="arr[]" type="checkbox" value="{$key}_3">
     </td>
     <td>
-    <input class="Master music" id="{$key}_4" name="arr[]" type="checkbox" value="{$key}_4" {$doCheck[3]}>
+    <input class="Master music" id="{$key}_4" name="arr[]" type="checkbox" value="{$key}_4">
     </td>
     </tr>
-
-EOF;
     
+EOF;
+
 }
 ?>
     </table>

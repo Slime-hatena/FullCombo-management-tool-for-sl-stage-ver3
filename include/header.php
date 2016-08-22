@@ -8,6 +8,12 @@ include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
 
 $Version = "ver.1608xx (3.0.0 Alpha)";
 
+//ログイン情報を取る
+require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.php");
+
+
+
+
 print<<<EOF
 
 <!DOCTYPE html>
@@ -29,6 +35,7 @@ print<<<EOF
     <link rel="stylesheet" type="text/css" href="style/bgTableMusic.css">
     <link rel="stylesheet" type="text/css" href="style/table.css">
     <link rel="stylesheet" type="text/css" href="style/check.css">
+    <link rel="stylesheet" type="text/css" href="style/userPage.css">
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 
@@ -51,6 +58,12 @@ print<<<EOF
         </header>
 
         <div id="contents">
-
-
 EOF;
+
+
+
+if (isset($screen_name)){
+    echo  "ログイン : @".$screen_name . "<br>";
+}else{
+    echo "未ログイン" . "<br>";
+}

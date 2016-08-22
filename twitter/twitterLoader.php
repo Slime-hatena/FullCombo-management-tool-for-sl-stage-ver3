@@ -1,14 +1,12 @@
 <?php
 // this file is include only!
 // twitter関連処理 ユーザーロード用
+// header.phpを読み込んでいる場合は不要
 /*
 require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.php");
 ------------------------------------------------------------------------------------------------
 $userid
-$consumer_key
-$consumer_secret
-$oauth_token
-$oauth_token_secret
+$screen_name
 $isLogin
 */
 
@@ -72,6 +70,10 @@ if ($stmt->rowCount() === 1) {
     var_dump($stmt->fetchAll()) : " . var_dump($stmt->fetchAll());
     include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
     
+    setcookie('_fcMgt4slStage', $cookieId ,time()-1,"/fcMgt4slStage/",$_SERVER['SERVER_NAME']);
+    $_SESSION = array();
+    session_destroy();
+}   else{
     setcookie('_fcMgt4slStage', $cookieId ,time()-1,"/fcMgt4slStage/",$_SERVER['SERVER_NAME']);
     $_SESSION = array();
     session_destroy();
