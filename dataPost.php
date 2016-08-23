@@ -199,7 +199,8 @@ if ( !($_FILES["cardsrc"]["size"] === 0 )) {
             rename ($filePath . $filename ,$newFilePath);
             
         } else {
-            echo "jpgまたはpngがアップロードできます。";
+            echo "jpgまたはpngがアップロードできます。<br>";
+            unlink($filePath . $filename);
         }
     }
 }

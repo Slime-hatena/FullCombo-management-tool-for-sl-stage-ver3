@@ -23,7 +23,7 @@ if (!$isLogin){
 
   <p>アカウントに各データを登録します。
     <br>すべてを入力する必要はありません。
-    <br>非公開にしたいデータは空白のまま送信してください。</p>
+    <br>非公開にしたいデータは空白または0で送信してください。</p>
 
   <form class="pure-form pure-form-aligned" action="dataPost.php" id="main" method="post" name="main" enctype="multipart/form-data">
 
