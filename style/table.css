@@ -1,13 +1,16 @@
 table {
     padding: 0px;
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 0px;
 }
-td {
-    padding: 10px 5px;
-}
-img {
+
+img.check {
     width : 80px;
     height : 80px;
 }
+
 .name {
     font-size : 22px;
 }
@@ -30,3 +33,54 @@ vertical-align: middle;
 span.br { 
     white-space: nowrap; 
     }
+
+td.title {
+    width: 200px;
+    height: 30px;
+    color: #000000;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 1px 0px;
+    text-align: center;
+    background-attachment: scroll !important;
+    background-position: right center !important;
+    background-repeat: no-repeat !important;
+}
+
+.heading_tr{
+background-color: #f0f8ff;
+}
+
+th.heading {
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+    height: 40px;
+}
+
+td.box_cell {
+    color: #000000;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 1px 0px;
+    text-align: center;
+    background: #ffffff;
+    padding: 10px 5px;
+    width: 60px;
+    font-size: 1.4em;
+}
+
+@media screen and (min-width: 800px) {
+    /* 横幅400以下 (iphone5ぐらいのものを想定) */
+    td.title {
+         width: auto;
+    }
+}
+
+.tableWrapper {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.do_fc{
+    background-color: #ffa500 !important;
+}

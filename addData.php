@@ -97,25 +97,26 @@ if (!$isLogin){
 
 
     <table cellpadding="5" cellspacing="1" rules="cols">
-      <tr>
-        <th class="heading">-</th>
-        <td class="heading">Debut</td>
-        <td class="heading">Regular</td>
-        <td class="heading">Pro</td>
-        <td class="heading">Master</td>
+
+<tr class="heading_tr">
+<th class="heading">Title</th>
+<th class="heading">Debut</th>
+<th class="heading">Regular</th>
+<th class="heading">Pro</th>
+<th class="heading">Master</th>
       </tr>
       <tr>
-        <th class="heading">難易度ごとに全てチェック</th>
-        <td>
+        <td class="title heading_tr">難易度ごとに全てチェック</td>
+    <td class="box_cell">
           <input class="checkAll music" id="Debut" type="checkbox">
         </td>
-        <td>
+    <td class="box_cell">
           <input class="checkAll music" id="Regular" type="checkbox">
         </td>
-        <td>
+    <td class="box_cell">
           <input class="checkAll music" id="Pro" type="checkbox">
         </td>
-        <td>
+    <td class="box_cell">
           <input class="checkAll music" id="Master" type="checkbox">
         </td>
       </tr>
@@ -143,19 +144,19 @@ foreach ($arr as $key => $value) {
     print<<<EOF
     
     <tr>
-    <th class="index" id="bg{$key}">
+    <td class="title" id="bg{$key}">
     <div class="tableWrapper">{$value['name']}</div>
-    </th>
-    <td>
+    </td>
+    <td class="box_cell">
     <input class="Debut music" id="{$key}_1" name="arr[]" type="checkbox" value="{$key}_1" {$doCheck['0']}>
     </td>
-    <td>
+    <td class="box_cell">
     <input class="Regular music" id="{$key}_2" name="arr[]" type="checkbox" value="{$key}_2" {$doCheck[1]}>
     </td>
-    <td>
+    <td class="box_cell">
     <input class="Pro music" id="{$key}_3" name="arr[]" type="checkbox" value="{$key}_3" {$doCheck[2]}>
     </td>
-    <td>
+    <td class="box_cell">
     <input class="Master music" id="{$key}_4" name="arr[]" type="checkbox" value="{$key}_4" {$doCheck[3]}>
     </td>
     </tr>

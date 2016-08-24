@@ -13,7 +13,6 @@ require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.
 
 
 
-
 print<<<EOF
 
 <!DOCTYPE html>
@@ -27,7 +26,7 @@ print<<<EOF
 	<link rel="stylesheet" href="style/reset.css">
 
 	<link rel="stylesheet" href="style/pure-min.css">
-
+	<link rel="stylesheet" href="lib/animatedtablesorter/style.css" type="text/css" />
 
 
     <link rel="stylesheet" href="style/base.css">
@@ -42,6 +41,11 @@ print<<<EOF
     <script src='js/jquery.js'></script>
     <script src="js/drawer.js"></script>
     <script type="text/javascript" src="js/checkAll.js"></script>
+    <script src="lib/animatedtablesorter/tsort.js"></script>
+    <script src="lib/animatedtablesorter/setting.js"></script>
+
+
+
 
 </head>
 

@@ -33,3 +33,5 @@ Copyright (c) Nicolas Gallagher and Jonathan Neal
 https://fortawesome.github.io/Font-Awesome  
 http://scripts.sil.org/OFL  
 
+### [ jQuery Animated Table Sorter 0.2.2](http://www.matanhershberg.com/plugins/jquery-animated-table-sorter/)
+02/25/2013
