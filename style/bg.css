@@ -1,0 +1,11 @@
+.layerImage{
+	background-image:   url(../img/bg/star.png);
+	background-repeat:  repeat;
+	background-position:    top left;
+	-moz-background-size:   cover;
+	background-size: contain; 	
+}
+.layerTransparent{
+	background-color:   rgba(255,255,255,0.5);
+	height:	    100%;
+}

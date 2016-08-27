@@ -4,9 +4,22 @@ print<<<EOF
 </div>
 
 </div>
+</div>
+
+</div>
 
 <nav id="global">
-    <div class="headline">{$Version}</div>
+    <div class="headline">{$Version}<br>
+EOF;
+
+if (isset($screen_name)){
+    echo  'ログイン : @'.$screen_name;
+}else{
+    echo "未ログイン";
+}
+
+print<<<EOF
+</div>
     <ul id="global-menu">
         <li><a href="index.php">トップページ</a></li>
 		<li><a href="login.php">ログイン / ログアウト</a></li>

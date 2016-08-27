@@ -90,9 +90,7 @@ if (!$isLogin){
     <div class="pure-control-group">
       <label for="bio">自己紹介
         <br>(120文字)</label>
-      <textarea maxlength="120" id="bio" name="bio" placeholder="" rows="3" cols="25">
-        <?php echo $bio ?>
-      </textarea>
+      <textarea maxlength="120" id="bio" name="bio" placeholder="" rows="3" cols="25"><?php echo $bio ?></textarea>
     </div>
 
 

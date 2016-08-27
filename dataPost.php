@@ -163,11 +163,12 @@ sleep(0.5);
 $bio = mb_strimwidth( $_POST['bio'], 0, 120, "", "UTF-8" );
 $sql = 'UPDATE fcmgtuser SET bio = :state WHERE id = :id';
 $stmt=$pdo->prepare($sql);
+$bio = preg_replace("/(\r\n|\n|\r)/", "<br>$1", $bio);
 $res=$stmt->execute(array(":state" => $bio , ":id" => $userid));
 if ($res) {
-    echo '<font color="blue">名刺 ID</font><br>';
+    echo '<font color="blue">自己紹介</font><br>';
 }else{
-    echo '<font color="red">名刺 ID</font><br>';
+    echo '<font color="red">自己紹介</font><br>';
 }
 ob_flush();
 flush();

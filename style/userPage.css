@@ -1,13 +1,60 @@
+hr.under_line{
+  margin: -3px 0px 10px 0px;
+}
+
+.userid{
+  font-size: 0.9em;
+}
+
+.user_name{
+  font-size: 3.0em;
+}
+
+.bio {
+    font-size: 1.5em;
+    margin-bottom: 12px
+}
+
 .user_left {
   float: left;
-  width: 240px;
+  width: 220px;
   margin-right: 16px;
 }
 .user_right {
   overflow: hidden;
 }
 
+.rank_icon{
+  width: 55px;
+  height: 55px;
+}
 
+.user_over{
+  margin:  3px 0px;
+}
+
+.prp_img 
+.gameid_img {
+    width: 60px;
+    height: auto;
+    display: inline-block;
+}
+
+.prp_text{
+    font-size: 20px;
+    vertical-align: text-bottom;
+    width: 3em;
+    display: inline-block;
+    text-align: right;
+}
+
+.gameid_text{
+    font-size: 20px;
+    vertical-align: text-bottom;
+    width: 6.6em;
+    display: inline-block;
+    text-align: right;
+}
 
 /* 画像のコピーガード*/
 .copy_guard {
@@ -36,4 +83,38 @@ width:90%;
      margin-left: auto;
      margin-right: auto;
      }
+}
+
+.do_fc{
+    background-color: #ffa500 !important;
+}
+
+.difficulty_img {
+    width: 100px;
+    height: auto;
+    display: inline-block;
+}
+
+.difficulty_text {
+    font-size: 16px;
+    width: 100px;
+    height: auto;
+    display: inline-block;
+}
+
+.difficulty_result {
+    font-size: 20px;
+    vertical-align: text-bottom;
+    width: 6em;
+    display: inline-block;
+    text-align: right;
+}
+
+.difficulty_per {
+    font-size: 18px;
+    vertical-align: text-bottom;
+    width: 6em;
+    display: inline-block;
+    text-align: right;
+    color: #666;
 }
