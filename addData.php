@@ -65,6 +65,11 @@ if (!$isLogin){
     </div>
 
     <div class="pure-control-group">
+      <label for="cb">名刺を削除する : </label>
+      <input type="checkbox" id="cb" name="deleteCard" value="false">
+    </div>
+
+    <div class="pure-control-group">
       <label for="rank"><span class="br">担当</span>
         <wbr><span class="br">アイドル</span></label>
       <select id="rank" name="rank" class="pure-input-1-1" size="1">
@@ -93,28 +98,30 @@ if (!$isLogin){
       <textarea maxlength="120" id="bio" name="bio" placeholder="" rows="3" cols="25"><?php echo str_replace("<br>","",$bio) ?></textarea>
     </div>
 
+    <?php include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/ad.php"); ?>
+
 
     <table cellpadding="5" cellspacing="1" rules="cols">
 
-<tr class="heading_tr">
-<th class="heading">Title</th>
-<th class="heading">Debut</th>
-<th class="heading">Regular</th>
-<th class="heading">Pro</th>
-<th class="heading">Master</th>
+      <tr class="heading_tr">
+        <th class="heading">Title</th>
+        <th class="heading">Debut</th>
+        <th class="heading">Regular</th>
+        <th class="heading">Pro</th>
+        <th class="heading">Master</th>
       </tr>
       <tr>
         <td class="title heading_tr">難易度ごとに全てチェック</td>
-    <td class="box_cell">
+        <td class="box_cell">
           <input class="checkAll music" id="Debut" type="checkbox">
         </td>
-    <td class="box_cell">
+        <td class="box_cell">
           <input class="checkAll music" id="Regular" type="checkbox">
         </td>
-    <td class="box_cell">
+        <td class="box_cell">
           <input class="checkAll music" id="Pro" type="checkbox">
         </td>
-    <td class="box_cell">
+        <td class="box_cell">
           <input class="checkAll music" id="Master" type="checkbox">
         </td>
       </tr>
@@ -158,7 +165,7 @@ foreach ($arr as $key => $value) {
     <input class="Master music" id="{$key}_4" name="arr[]" type="checkbox" value="{$key}_4" {$doCheck[3]}>
     </td>
     </tr>
-
+    
 EOF;
     
 }
@@ -173,5 +180,8 @@ EOF;
   </form>
 
   <?php
+   include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/ad.php"); 
 
 include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
+
+

@@ -7,6 +7,7 @@ include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
 */
 
 $Version = "ver.1608xx (3.0.0 Alpha)";
+$adViewCount = 0;
 
 //ログイン情報を取る
 require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.php");

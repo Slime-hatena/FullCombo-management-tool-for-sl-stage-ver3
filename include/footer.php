@@ -1,5 +1,22 @@
 <?php
+$y = date('Y');
+
 print<<<EOF
+
+
+</div>
+
+<div class="footer">
+<p>
+Copyright © 2015 - {$y} Slime_hatena All Rights Reserved.</p>
+
+<p>
+©BANDAI NAMCO Entertainment Inc.<br>
+©BNEI / PROJECT CINDERELLA</p>
+
+<p>
+権利者様からの申立て等は速やかに対応します。<br>
+画像データをはじめとした著作物は著作者様に帰属します。</p>
 
 </div>
 
@@ -23,9 +40,11 @@ print<<<EOF
     <ul id="global-menu">
         <li><a href="index.php">トップページ</a></li>
 		<li><a href="login.php">ログイン / ログアウト</a></li>
-		<li><a href="mypage.php">マイページ</a></li>
         <li><a href="addData.php">データ登録</a></li>
-        <li><a href="fcRate.php">参考フルコンボレート</a></li>
+		<li><a href="user.php?my">マイページ</a></li>
+        <li><a href="generate.php">画像生成(準備中)</a></li>
+        <li><a href="search.php">検索(準備中)</a></li>
+        <li><a href="fcRate.php">参考フルコンボレート(準備中)</a></li>
         <li><a href="change.php">更新履歴</a></li>   
         <li><a href="policy.php">免責事項・プライバシーポリシー</a></li>
         <li><a href="license.php">ライセンス</a></li>

@@ -43,6 +43,35 @@ body {
     line-height: 1.4;
 }
 
+p {
+	margin: 8px 0px;
+}
+
+h2 {
+	position: relative;
+	padding: .75em 1em .75em 1.5em;
+	border: 1px solid #ccc;
+	margin: 8px -2px;
+}
+h2::after {
+	position: absolute;
+	top: .5em;
+	left: .5em;
+	content: '';
+	width: 6px;
+	height: -webkit-calc(100% - 1em);
+	height: calc(100% - 1em);
+	background-color: #3498db;
+	border-radius: 4px;
+}
+
+h3 {
+	padding: .5em .75em;
+	background-color: #f6f6f6;
+	border-bottom: 1px solid #ccc;
+	border-radius: 6px;
+}
+
 
 /*===========================================
 wapper
@@ -308,6 +337,15 @@ global
 	cursor: pointer;
 }
 
+/*===========================================
+footer
+===========================================*/
+
+.footer {
+padding: 8px 6px 4px 6px;
+	background-color: #444;
+	color: #ddd;
+}
 
 /*===========================================
 transition

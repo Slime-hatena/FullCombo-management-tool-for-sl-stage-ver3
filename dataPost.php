@@ -44,7 +44,7 @@ foreach ($arr as $key => $value) {
         $stmt=$pdo->prepare($sql);
         $res=$stmt->execute(array(":state" => 0 , ":id" => $userid));
         if ($res) {
-            $p = $c / $arr_c * 100;
+            $p = round ($c / $arr_c * 100,0);
             echo "<script>document.getElementById( 'progress01' ).innerHTML = '{$p}%'</script>";
         }else{
             echo '<font color="red">失敗(1) : ' . $key . "_" . $i . "  </font>";
@@ -67,7 +67,7 @@ foreach ($_POST['arr'] as $key => $value){
     $stmt=$pdo->prepare($sql);
     $res=$stmt->execute(array(":state" => 1 , ":id" => $userid));
     if ($res) {
-        $p = $c / $arr_c * 100;
+        $p = round($c / $arr_c * 100,0);
         echo "<script>document.getElementById( 'progress02' ).innerHTML = '{$p}%'</script>";
     }else{
         echo '<font color="red">失敗(2) : ' . $value . "  </font>";
@@ -241,6 +241,18 @@ if (isset($newFilePath)){
 ob_flush();
 flush();
 sleep(0.5);
+
+if(isset($_POST['deleteCard']) && $_POST['deleteCard']){
+     $sql = 'UPDATE fcmgtuser SET cardsrc = :state WHERE id = :id';
+    $stmt=$pdo->prepare($sql);
+    $res=$stmt->execute(array(":state" => "" , ":id" => $userid));
+    if ($res) {
+        echo '<font color="blue">名刺画像削除</font><br>';
+    }else{
+        echo '<font color="red">名刺画像削除</font><br>';
+    }
+
+}
 
 
 echo "全ての処理が完了しました。自動的に移動します。";

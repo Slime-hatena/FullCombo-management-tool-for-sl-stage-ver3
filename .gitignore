@@ -48,3 +48,5 @@ hidden/
 log/*.txt
 ___memo.txt
 *.htaccess
+ad.php
+cardimg/*
