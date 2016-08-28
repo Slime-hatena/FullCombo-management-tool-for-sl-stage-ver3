@@ -95,6 +95,19 @@ $sql = 'UPDATE fcmgtuser SET gameid = :state WHERE id = :id';
 $stmt=$pdo->prepare($sql);
 $res=$stmt->execute(array(":state" => $_POST['gameid'] , ":id" => $userid));
 if ($res) {
+    echo '<font color="blue">Twitter</font><br>';
+}else{
+    echo '<font color="red">Twitter</font><br>';
+}
+ob_flush();
+flush();
+sleep(0.5);
+
+// Twitter
+$sql = 'UPDATE fcmgtuser SET twitter = :state WHERE id = :id';
+$stmt=$pdo->prepare($sql);
+$res=$stmt->execute(array(":state" => $_POST['twitter'] , ":id" => $userid));
+if ($res) {
     echo '<font color="blue">Game id</font><br>';
 }else{
     echo '<font color="red">Game id</font><br>';
@@ -163,7 +176,7 @@ sleep(0.5);
 $bio = mb_strimwidth( $_POST['bio'], 0, 120, "", "UTF-8" );
 $sql = 'UPDATE fcmgtuser SET bio = :state WHERE id = :id';
 $stmt=$pdo->prepare($sql);
-$bio = preg_replace("/(\r\n|\n|\r)/", "<br>$1", $bio);
+$bio = preg_replace("/(\r\n|\n|\r)/", "<br>$1", str_replace("<","",$bio));
 $res=$stmt->execute(array(":state" => $bio , ":id" => $userid));
 if ($res) {
     echo '<font color="blue">自己紹介</font><br>';

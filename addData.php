@@ -4,7 +4,7 @@ require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.
 
 if (isset($userid)){
     $getUserid = $userid;
-    $useShortiD = false;
+    $useShortid = false;
     include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/getUserdata.php");
 }
 
@@ -35,7 +35,7 @@ if (!$isLogin){
 
     <div class="pure-control-group">
       <label for="id">Twitter</label>
-      <input id="id" type="text" name="twitter" size="15" placeholder="@<?php echo $screen_name ?>" disabled>
+      <input id="id" type="text" name="twitter" size="15" value="<?php echo $screen_name ?>" readonly>
     </div>
 
     <div class="pure-control-group">
@@ -90,7 +90,7 @@ if (!$isLogin){
     <div class="pure-control-group">
       <label for="bio">自己紹介
         <br>(120文字)</label>
-      <textarea maxlength="120" id="bio" name="bio" placeholder="" rows="3" cols="25"><?php echo $bio ?></textarea>
+      <textarea maxlength="120" id="bio" name="bio" placeholder="" rows="3" cols="25"><?php echo str_replace("<br>","",$bio) ?></textarea>
     </div>
 
 
@@ -166,11 +166,6 @@ EOF;
     </table>
 
     &nbsp;ページ上部のメニューにある免責事項、プライバシーポリシーをよくお読みになって同意いただける場合のみご使用ください。
-    <div class="pure-controls">
-      <label for="cb" class="pure-checkbox">
-        <input id="cb" type="checkbox"> 同意します
-      </label>
-    </div>
 
     <div class="pure-controls">
       <button type="submit" class="pure-button pure-button-primary">送信</button>

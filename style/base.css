@@ -56,6 +56,14 @@ wapper
 	padding: 20px;
 }
 
+@media screen and (max-width: 400px) {
+    /* 横幅400以下 (iphone5ぐらいのものを想定) */
+	#contents {
+		padding: 1px;
+		padding-top: 2.0em;
+	}
+}
+
 #disable-layer {
 	width: 100%;
 	height: 100%;

@@ -11,7 +11,7 @@ hr.under_line{
 }
 
 .bio {
-    font-size: 1.5em;
+    font-size: 1.4em;
     margin-bottom: 12px
 }
 
@@ -69,10 +69,16 @@ background: url(../img/prof/block.gif);
 }
 
 .card {
-width:90%;
+width:95%;
  display: block;
  margin-left: auto;
  margin-right: auto;
+}
+
+.cardid{
+    margin-left: 30px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 @media screen and (min-width: 820px) {
@@ -80,7 +86,7 @@ width:90%;
    .card{ 
      width:800px;
      display: block;
-     margin-left: auto;
+     margin-left: 0px;
      margin-right: auto;
      }
 }
@@ -117,4 +123,35 @@ width:90%;
     display: inline-block;
     text-align: right;
     color: #666;
+}
+
+div.Information {
+    width: 40em;
+    background: #cbf5ff;
+    margin: 5px;
+    padding: 10px;
+}
+
+@media screen and (max-width: 400px) {
+   /* pcでは名刺画像を横800pxにする */
+div.Information {
+    width: auto;
+    background: #cbf5ff;
+    margin: 5px;
+    padding: 10px;
+}
+}
+
+@media screen and (max-width: 450px) {
+   /* 難易度関連が変な改行になってしまうのを治す */
+
+   .difficulty_img {
+    margin-right: 50%;
+    margin-right: calc(100% - 100px);
+}
+
+.difficulty_text {
+    margin-right: 50%;
+    margin-right: calc(100% - 100px);
+}
 }

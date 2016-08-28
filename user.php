@@ -1,18 +1,35 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/header.php");
-require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.php");
 
-if (!$isLogin){
-    echo "このページはログインが必要です";
+
+
+//何を使ってユーザーを判定
+if( array_key_exists( 'id',$_GET )) {
+    //get->idで判定
+    $getUserid = $_GET['id'];
+    $useShortid = false;
+
+}elseif( array_key_exists( 's',$_GET ) ) {
+    //get->sで判定
+    $getUserid = $_GET['s'];
+    $useShortid = true;
+
+}else{
+   echo '<meta http-equiv="refresh" content="0;URL=index.php">';
     include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
     exit();
 }
 
-if (isset($userid)){
-    $getUserid = $userid;
-    $useShortid = false;
-    include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/getUserdata.php");
+
+include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/getUserdata.php");
+
+if($id == null){
+       echo 'このユーザーは存在しません。<br>';
+       echo '(0' . $useShortid . ')' . $getUserid;
+    include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
+    exit();
 }
+
 
 
 $json_music = file_get_contents("../slStageMusicDatabase/music.json");
@@ -160,7 +177,7 @@ Twitter を受け取るようにする
 
 
 print<<<EOF
-<p><span class="userid">UserID : {$id}&nbsp;({$shortid})&nbsp;<a href="https://twitter.com/{$screen_name}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i>@{$twitterid}</a></span></p>
+<p><span class="userid">UserID : {$id}&nbsp;({$shortid})&nbsp;<a href="https://twitter.com/{$twitterid}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i>@{$twitterid}</a></span></p>
 <p><span class="user_name">{$name}</span><hr class="under_line"></p>
 
 <p><div class="bio">{$bio}</div></p>
@@ -185,7 +202,7 @@ echo '<div class="difficulty">
 <p><div class="d_regular"><img src="img/difficulty/regular.png" class="difficulty_img">&nbsp;<span class="difficulty_result">' . $fcDifficulty["regular"]  . " / " .  $musicAll . '</span><span class="difficulty_per">' .  sprintf('%0.2f',$fcDifficulty["regular"] / $musicAll * 100 ). '%</span></div></p>
 <p><div class="d_pro"><img src="img/difficulty/pro.png" class="difficulty_img">&nbsp;<span class="difficulty_result">' . $fcDifficulty["pro"]  . " / " .  $musicAll . '</span><span class="difficulty_per">' . sprintf('%0.2f', $fcDifficulty["pro"] / $musicAll * 100 ). '%</span></div></p>
 <p><div class="d_master"><img src="img/difficulty/master.png" class="difficulty_img">&nbsp;<span class="difficulty_result">' . $fcDifficulty["master"]  . " / " .  $musicAll . '</span><span class="difficulty_per">' . sprintf('%0.2f', $fcDifficulty["master"] / $musicAll * 100) . '%</span></div></p>
-<p><div class="d_all"><span class="difficulty_text">&nbsp;All</span>&nbsp;<span class="difficulty_result">' . $a_all  . " / " .  $musicAll * 4 . '</span><span class="difficulty_per">' . sprintf('%0.2f', $a_all / ($musicAll * 4) * 100) . '%</span></div></p>
+<p><div class="d_all">&nbsp;<span class="difficulty_text">All</span>&nbsp;<span class="difficulty_result">' . $a_all  . " / " .  $musicAll * 4 . '</span><span class="difficulty_per">' . sprintf('%0.2f', $a_all / ($musicAll * 4) * 100) . '%</span></div></p>
 </div> <hr>';
 
 
@@ -211,6 +228,7 @@ if (!($cardid ===  "")){
     ';
 }
 
+// 名刺ID コピーできるようにする
 print<<<EOF
 
 
@@ -258,12 +276,13 @@ echo  "</table>";
 
 //コピー用URLを生成
 
-echo '<div class="Information"><b>共有用URL</b><br>
-<b>通常 : </b>http://svr.aki-memo.net/fcMgt4slStage/user.php?id=' . $id .  '<br>
-<b>短縮 : </b>http://svr.aki-memo.net/fcMgt4slStage/user.php?s=' . $shortid .  '
+echo '<div class="Information">共有用URL<br>
+通常 : http://svr.aki-memo.net/fcMgt4slStage/user.php?id=' . $id .  '<br>
+短縮 : http://svr.aki-memo.net/fcMgt4slStage/user.php?s=' . $shortid .  '
 </div>
 ';
 
 
 
 include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
+
