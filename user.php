@@ -20,153 +20,160 @@ if( array_key_exists( 'my',$_GET )) {
         $useShortid = false;
         include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/getUserdata.php");
     }
+    
+}elseif( array_key_exists( 'id',$_GET )) {
+    //get->idで判定
+    $getUserid = $_GET['id'];
+    $useShortid = false;
+    
+}elseif( array_key_exists( 's',$_GET ) ) {
+    //get->sで判定
+    $getUserid = $_GET['s'];
+    $useShortid = true;
+    
+}else{
+    echo '<meta http-equiv="refresh" content="0;URL=index.php">';
+    include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
+    exit();
+}
+
+
+include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/getUserdata.php");
+
+if($id == null){
+    echo 'このユーザーは存在しません。<br>';
+    echo '(0' . $useShortid . ')' . $getUserid;
+    include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
+    exit();
+}
+
+
+
+$json_music = file_get_contents("../slStageMusicDatabase/music.json");
+$json_music = mb_convert_encoding($json_music, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
+$slStageMusicList = json_decode($json_music, true);
+
+
+
+// 各難易度ごとのフルコン曲算出
+$fcDifficulty = [   //フルコンした難易度別曲数
+"debut" => 0,
+"regular" => 0,
+"pro" => 0,
+"master" => 0
+];
+$fcLevel = [    //フルコンしたレベル別曲数
+28 =>0,
+27 =>0,
+26 =>0,
+25 =>0,
+24 =>0,
+23 =>0,
+22 =>0,
+21 =>0,
+20 =>0,
+19 =>0,
+18 =>0,
+17 =>0,
+16 =>0,
+15 =>0,
+14 =>0,
+13 =>0,
+12 =>0,
+11 =>0,
+10 =>0,
+9 =>0,
+8 =>0,
+7 =>0,
+6 =>0,
+5 =>0
+];
+$levelAll = [ //レベル別曲数
+28 =>0,
+27 =>0,
+26 =>0,
+25 =>0,
+24 =>0,
+23 =>0,
+22 =>0,
+21 =>0,
+20 =>0,
+19 =>0,
+18 =>0,
+17 =>0,
+16 =>0,
+15 =>0,
+14 =>0,
+13 =>0,
+12 =>0,
+11 =>0,
+10 =>0,
+9 =>0,
+8 =>0,
+7 =>0,
+6 =>0,
+5 =>0
+];
+$musicAll = 0;  //全曲数
+
+$sql = "SELECT * FROM  `fcmgt4slstage` WHERE  `id` = :id";
+$stmt=$pdo->prepare($sql);
+$res=$stmt->execute(array(":id" =>$id));
+$query = $stmt->fetchAll()[0];
+
+
+$doFc = array(array()); //フルコンしてるか
+for ($d = 1; $d <= 4; $d++) {
+    $i = 1;   //ループ用その2
+    $a = 0;  //難易度レベル一時保存用
+    $b = ""; //難易度一時保存用
+    $f = false;  //フルコンしたかどうか
+    $mn= false; //no play
+    while(isset($query[sprintf('%03d', $i) . "_" . $d])){
         
-    }elseif( array_key_exists( 'id',$_GET )) {
-        //get->idで判定
-        $getUserid = $_GET['id'];
-        $useShortid = false;
+        if ($query[sprintf('%03d', $i) . "_" . $d] == 1){
+            $f = true;
+        }elseif ($query[sprintf('%03d', $i) . "_" . $d] == 2){
+            $mn = true; // noplay
+        }
         
-    }elseif( array_key_exists( 's',$_GET ) ) {
-        //get->sで判定
-        $getUserid = $_GET['s'];
-        $useShortid = true;
         
+        
+        // fcLevelAll
+        
+        switch ($d) {
+            case 1:
+                $b = "debut";
+                break;
+            case 2:
+                $b = "regular";
+                break;
+            case 3:
+                $b = "pro";
+                break;
+            case 4:
+                $b = "master";
+                break;
+            default:
+                continue;
+                break;
+    }
+    $a = $slStageMusicList[sprintf('%03d', $i)][$b];
+
+    if ($f){
+        $fcDifficulty[$b]++;
+        $fcLevel[$a]++;
+        $doFc[sprintf('%03d', $i)][$d] = 'do_fc';
+    }elseif ($mn){
+        $doFc[sprintf('%03d', $i)][$d] = 'no_play';
     }else{
-        echo '<meta http-equiv="refresh" content="0;URL=index.php">';
-        include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
-        exit();
+        $doFc[sprintf('%03d', $i)][$d] = '';
     }
-    
-    
-    include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/getUserdata.php");
-    
-    if($id == null){
-        echo 'このユーザーは存在しません。<br>';
-        echo '(0' . $useShortid . ')' . $getUserid;
-        include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
-        exit();
-    }
-    
-    
-    
-    $json_music = file_get_contents("../slStageMusicDatabase/music.json");
-    $json_music = mb_convert_encoding($json_music, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
-    $slStageMusicList = json_decode($json_music, true);
-    
-    
-    
-    // 各難易度ごとのフルコン曲算出
-    $fcDifficulty = [   //フルコンした難易度別曲数
-    "debut" => 0,
-    "regular" => 0,
-    "pro" => 0,
-    "master" => 0
-    ];
-    $fcLevel = [    //フルコンしたレベル別曲数
-    28 =>0,
-    27 =>0,
-    26 =>0,
-    25 =>0,
-    24 =>0,
-    23 =>0,
-    22 =>0,
-    21 =>0,
-    20 =>0,
-    19 =>0,
-    18 =>0,
-    17 =>0,
-    16 =>0,
-    15 =>0,
-    14 =>0,
-    13 =>0,
-    12 =>0,
-    11 =>0,
-    10 =>0,
-    9 =>0,
-    8 =>0,
-    7 =>0,
-    6 =>0,
-    5 =>0
-    ];
-    $levelAll = [ //レベル別曲数
-    28 =>0,
-    27 =>0,
-    26 =>0,
-    25 =>0,
-    24 =>0,
-    23 =>0,
-    22 =>0,
-    21 =>0,
-    20 =>0,
-    19 =>0,
-    18 =>0,
-    17 =>0,
-    16 =>0,
-    15 =>0,
-    14 =>0,
-    13 =>0,
-    12 =>0,
-    11 =>0,
-    10 =>0,
-    9 =>0,
-    8 =>0,
-    7 =>0,
-    6 =>0,
-    5 =>0
-    ];
-    $musicAll = 0;  //全曲数
-    
-    $sql = "SELECT * FROM  `fcmgt4slstage` WHERE  `id` = :id";
-    $stmt=$pdo->prepare($sql);
-    $res=$stmt->execute(array(":id" =>$id));
-    $query = $stmt->fetchAll()[0];
-    
-    
-    
-    $doFc = array(array()); //フルコンしてるか
-    for ($d = 1; $d <= 4; $d++) {
-        $i = 1;   //ループ用その2
-        $a = 0;  //難易度レベル一時保存用
-        $b = ""; //難易度一時保存用
-        $f = true;  //フルコンしたかどうか
-        while(isset($query[sprintf('%03d', $i) . "_" . $d])){
-            
-            if (!($query[sprintf('%03d', $i) . "_" . $d] == 1)){
-                $f = false;
-            }
-            
-            
-            // /fcLevelAll
-            
-            switch ($d) {
-                case 1:
-                    $b = "debut";
-                    break;
-                case 2:
-                    $b = "regular";
-                    break;
-                case 3:
-                    $b = "pro";
-                    break;
-                case 4:
-                    $b = "master";
-                    break;
-                default:
-                    continue;
-                    break;
-        }
-        $a = $slStageMusicList[sprintf('%03d', $i)][$b];
-        if ($f){
-            $fcDifficulty[$b]++;
-            $fcLevel[$a]++;
-            $doFc[sprintf('%03d', $i)][$d] = 'do_fc';
-        }else{
-            $doFc[sprintf('%03d', $i)][$d] = '';
-        }
-        $levelAll[$a]++;
-        $i++;
-        $f = true;
-    }
+    $levelAll[$a]++;
+    $i++;
+    $f = false;
+    $mn = false;
+}
 }
 $musicAll = $i - 1;
 

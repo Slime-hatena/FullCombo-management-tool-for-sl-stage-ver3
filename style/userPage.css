@@ -95,6 +95,10 @@ width:95%;
     background-color: #ffa500 !important;
 }
 
+.no_play{
+    background-color: #999 !important;
+}
+
 .difficulty_img {
     width: 100px;
     height: auto;
