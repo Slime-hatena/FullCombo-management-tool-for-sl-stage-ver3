@@ -6,10 +6,6 @@ $adViewCount = 0;
 require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.php");
 
 
-
-
-
-
 //何を使ってユーザーを判定するか
 if( array_key_exists( 'my',$_GET )) {
     //マイページを表示
@@ -17,6 +13,7 @@ if( array_key_exists( 'my',$_GET )) {
     require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.php");
     
     if (!$isLogin){
+        include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/header.php");
         echo "このページはログインが必要です";
         include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
         exit();
@@ -44,10 +41,10 @@ if( array_key_exists( 'my',$_GET )) {
     exit();
 }
 
-
 include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/getUserdata.php");
 
 if($id == null){
+    include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/header.php");
     echo 'このユーザーは存在しません。<br>';
     echo '(0' . $useShortid . ')' . $getUserid;
     include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
@@ -370,12 +367,23 @@ EOF;
 echo  "</table>";
 
 //コピー用URLを生成
+$tweetStr = $name . "さんのフルコンボ曲数は" .
+  $a_all  . "/" .  $musicAll * 4 . "(" . sprintf('%0.2f', $a_all / ($musicAll * 4) * 100) . '%)です。' . 
+  '#fcMgt4slStage #デレステ 詳細→';
 
 echo '<div class="Information">共有用URL<br>
 通常 : http://svr.aki-memo.net/fcMgt4slStage/user.php?id=' . $id .  '<br>
-短縮 : http://svr.aki-memo.net/fcMgt4slStage/user.php?s=' . $shortid .  '
-</div>
+短縮 : http://svr.aki-memo.net/fcMgt4slStage/user.php?s=' . $shortid .  '<br>
+
 ';
+
+
+
+print<<<EOF
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://svr.aki-memo.net/fcMgt4slStage/user.php?id={$id}" data-text="{$tweetStr}" data-lang="ja" data-size="large">ツイート</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+EOF;
+
 
 include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/ad.php");
 
