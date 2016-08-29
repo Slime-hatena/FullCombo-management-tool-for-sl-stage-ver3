@@ -4,6 +4,9 @@ include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/header.php");
 
 include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
 ページの最後に↑
+
+user.phpのみ使用していない。
+
 */
 
 $Version = "ver.1608xx (3.0.0 Alpha)";
@@ -46,7 +49,24 @@ print<<<EOF
 <script src="lib/animatedtablesorter/tsort.js"></script>
 <script src="lib/animatedtablesorter/setting.js"></script>
 
+<!-- favicon -->
+<link rel="shortcut icon" href="img/icon/favicon.ico">
+<!-- iOS Safari -->
+<link rel="apple-touch-icon" sizes="120x120"
+	href="img/icon/apple-touch-icon.png">
+<!-- iOS Safari(旧) / Android標準ブラウザ(一部) -->
+<link rel="apple-touch-icon-precomposed"
+	href="img/icon/apple-touch-icon.png">
+<!-- Android標準ブラウザ(一部) -->
+<link rel="shortcut icon" href="img/icon/apple-touch-icon.png">
+<!-- Android Chrome -->
+<link rel="icon" sizes="120x120" href="img/icon/apple-touch-icon.png">
 
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@fcMgt4slStage" />
+<meta name="twitter:title" content="FullComboManagementTool for sl-stage" />
+<meta name="twitter:description" content="デレステのフルコン状況を共有できるツールです。他の人のデータを閲覧することもできます。" />
+<meta name="twitter:image" content="http://svr.aki-memo.net/fcMgt4slStage/img/icon/apple-touch-icon.png" />
 
 
 </head>

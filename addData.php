@@ -13,12 +13,17 @@ $json_music = file_get_contents("../slStageMusicDatabase/music.json");
 $json_music = mb_convert_encoding($json_music, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 $arr = json_decode($json_music, true);
 
+
+
 if (!$isLogin){
     echo "このページはログインが必要です";
     include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
     exit();
 }
 
+// ランク関連
+$selectRank = array("","","","","","","","");
+$selectRank[$rank] = "selected";
 ?>
 
   <p>アカウントに各データを登録します。
@@ -81,14 +86,14 @@ if (!$isLogin){
       <label for="rank"><span class="br">プロデューサー</span>
         <wbr><span class="br">ランク</span></label>
       <select id="rank" name="rank" class="pure-input-1-1" size="1">
-        <option value="0">非公開</option>
-        <option value="1">E : 駆け出しプロデューサー</option>
-        <option value="2">D : 新米プロデューサー</option>
-        <option value="3">C : 普通プロデューサー</option>
-        <option value="4">B : 中堅プロデューサー</option>
-        <option value="5">A : 敏腕プロデューサー</option>
-        <option value="6">S : 売れっ子プロデューサー</option>
-        <option value="7">SS : 超売れっ子プロデューサー</option>
+        <option value="0" <?php echo $selectRank[0] ?>>非公開</option>
+        <option value="1" <?php echo $selectRank[1] ?>>E : 駆け出しプロデューサー</option>
+        <option value="2" <?php echo $selectRank[2] ?>>D : 新米プロデューサー</option>
+        <option value="3" <?php echo $selectRank[3] ?>>C : 普通プロデューサー</option>
+        <option value="4" <?php echo $selectRank[4] ?>>B : 中堅プロデューサー</option>
+        <option value="5" <?php echo $selectRank[5] ?>>A : 敏腕プロデューサー</option>
+        <option value="6" <?php echo $selectRank[6] ?>>S : 売れっ子プロデューサー</option>
+        <option value="7" <?php echo $selectRank[7] ?>>SS : 超売れっ子プロデューサー</option>
       </select>
     </div>
 
@@ -128,9 +133,14 @@ if (!$isLogin){
 
       <?php
 
+// 楽曲の並び替え処理
+foreach ($arr as $key => $value){
+    $sortKey[$key] = $value['order'];
+}
+array_multisort ( $sortKey , SORT_ASC , $arr);
 
-foreach ($arr as $key => $value) {
-    
+
+foreach ($arr as $key => $value) {    
     $k = $key . "_1," . $key . "_2," . $key . "_3," . $key . "_4";
     $sql = "SELECT " . $k . " FROM  `fcmgt4slstage` WHERE  `id` = :id";
     $stmt=$pdo->prepare($sql);

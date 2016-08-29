@@ -5,6 +5,11 @@
 開発中。
 
 ## ライセンス
+
+### アイドルマスターシンデレラガールズ
+©BANDAI NAMCO Entertainment Inc.  
+©BNEI / PROJECT CINDERELLA
+
 ### FullCombo-management-tool-for-sl-stage-ver3
 This software is released under the MIT License, see LICENSE.  
 
