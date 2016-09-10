@@ -40,7 +40,7 @@ print<<<EOF
     <ul id="global-menu">
         <li><a href="index.php">トップページ</a></li>
 		<li><a href="login.php">ログイン / ログアウト</a></li>
-        <li><a href="addData.php">データ登録</a></li>
+        <li><a href="addData.php">プロフィール登録/更新</a></li>
 		<li><a href="user.php?my">マイページ</a></li>
         <li><a href="generate.php">画像生成(準備中)</a></li>
         <li><a href="search.php">検索(準備中)</a></li>

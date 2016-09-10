@@ -483,7 +483,7 @@ $file_name = "twittercardimg/" . $userid . ".png";
 imagepng ( $img, $file_name );
 
 echo "全ての処理が完了しました。自動的に移動します。";
-echo '<meta http-equiv="refresh" content="3;URL=addData.php">';
+echo '<meta http-equiv="refresh" content="1;URL=addData.php">';
 
 ob_flush();
 flush();

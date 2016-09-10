@@ -103,35 +103,39 @@ $selectRank[$rank] = "selected";
       <textarea maxlength="120" id="bio" name="bio" placeholder="" rows="3" cols="25"><?php echo str_replace("<br>","",$bio) ?></textarea>
     </div>
 
+    <div class="pure-controls">
+      <button type="submit" class="pure-button pure-button-primary">送信</button>
+    </div>
+
     <?php include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/ad.php"); ?>
 
 
-    <table cellpadding="5" cellspacing="1" rules="cols">
+      <table cellpadding="5" cellspacing="1" rules="cols">
 
-      <tr class="heading_tr">
-        <th class="heading">Title</th>
-        <th class="heading">Debut</th>
-        <th class="heading">Regular</th>
-        <th class="heading">Pro</th>
-        <th class="heading">Master</th>
-      </tr>
-      <tr>
-        <td class="title heading_tr">難易度ごとに全てチェック</td>
-        <td class="box_cell">
-          <input class="checkAll music" id="Debut" type="checkbox">
-        </td>
-        <td class="box_cell">
-          <input class="checkAll music" id="Regular" type="checkbox">
-        </td>
-        <td class="box_cell">
-          <input class="checkAll music" id="Pro" type="checkbox">
-        </td>
-        <td class="box_cell">
-          <input class="checkAll music" id="Master" type="checkbox">
-        </td>
-      </tr>
+        <tr class="heading_tr">
+          <th class="heading">Title</th>
+          <th class="heading">Debut</th>
+          <th class="heading">Regular</th>
+          <th class="heading">Pro</th>
+          <th class="heading">Master</th>
+        </tr>
+        <tr>
+          <td class="title heading_tr">難易度ごとに全てチェック</td>
+          <td class="box_cell">
+            <input class="checkAll music" id="Debut" type="checkbox">
+          </td>
+          <td class="box_cell">
+            <input class="checkAll music" id="Regular" type="checkbox">
+          </td>
+          <td class="box_cell">
+            <input class="checkAll music" id="Pro" type="checkbox">
+          </td>
+          <td class="box_cell">
+            <input class="checkAll music" id="Master" type="checkbox">
+          </td>
+        </tr>
 
-      <?php
+        <?php
 
 // 楽曲の並び替え処理
 foreach ($arr as $key => $value){
@@ -140,7 +144,7 @@ foreach ($arr as $key => $value){
 array_multisort ( $sortKey , SORT_ASC , $arr);
 
 
-foreach ($arr as $key => $value) {    
+foreach ($arr as $key => $value) {
     $k = $key . "_1," . $key . "_2," . $key . "_3," . $key . "_4";
     $sql = "SELECT " . $k . " FROM  `fcmgt4slstage` WHERE  `id` = :id";
     $stmt=$pdo->prepare($sql);
@@ -180,18 +184,16 @@ EOF;
     
 }
 ?>
-    </table>
+      </table>
 
-    &nbsp;ページ上部のメニューにある免責事項、プライバシーポリシーをよくお読みになって同意いただける場合のみご使用ください。
+      &nbsp;ページ上部のメニューにある免責事項、プライバシーポリシーをよくお読みになって同意いただける場合のみご使用ください。
 
-    <div class="pure-controls">
-      <button type="submit" class="pure-button pure-button-primary">送信</button>
-    </div>
+      <div class="pure-controls">
+        <button type="submit" class="pure-button pure-button-primary">送信</button>
+      </div>
   </form>
 
   <?php
-   include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/ad.php"); 
+include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/ad.php");
 
 include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
-
-

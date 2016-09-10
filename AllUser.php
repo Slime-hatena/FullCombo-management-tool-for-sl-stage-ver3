@@ -13,7 +13,7 @@ try {
     exit ("ユーザーデータを取得中にエラーが発生しました。管理者にお問い合わせください。");
 }
 
-$sql = "SELECT * FROM  `fcmgtuser`";
+$sql = "SELECT * FROM  `fcmgtuser` ORDER BY `shortid` ASC";
 $stmt=$pdo->prepare($sql);
 $res=$stmt->execute();
 
@@ -27,12 +27,15 @@ echo '
 ';
 
 
-
-
 foreach ($arr as $value) {
     if (!($value['name'] == "")){
-        echo '<p><a href="user.php?s=' . $value['shortid'] . '">' . $value['shortid']. '.' . $value['name'] . ' PLv:' . $value['level']
-        .'</a><br>' . mb_strimwidth($value['bio'], 0, 60, "...") . '</p>';
+        if ($value['level'] == ""){
+            $plevel = "非公開";
+        }else{
+        $plevel = $value['level'];
+        }
+        echo '<p><a href="user.php?s=' . $value['shortid'] . '">' . $value['shortid']. '.' . $value['name'] . ' PLv.' . $plevel
+        .'</a><br>' . mb_strimwidth($value['bio'], 0, 100, "...") . '</p>';
     }
 }
 
