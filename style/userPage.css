@@ -148,7 +148,6 @@ div.Information {
 
 @media screen and (max-width: 450px) {
    /* 難易度関連が変な改行になってしまうのを治す */
-
    .difficulty_img {
     margin-right: 50%;
     margin-right: calc(100% - 100px);

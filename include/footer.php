@@ -44,6 +44,7 @@ print<<<EOF
 		<li><a href="user.php?my">マイページ</a></li>
         <li><a href="generate.php">画像生成(準備中)</a></li>
         <li><a href="search.php">検索(準備中)</a></li>
+        <li><a href="AllUser.php">全ユーザー一覧</a></li>
         <li><a href="fcRate.php">参考フルコンボレート(準備中)</a></li>
         <li><a href="change.php">更新履歴</a></li>   
         <li><a href="policy.php">免責事項・プライバシーポリシー</a></li>

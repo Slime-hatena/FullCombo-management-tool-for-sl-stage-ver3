@@ -294,4 +294,6 @@ else {
     include($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/log/logWriter.php");
 }
 
-header("Refresh: 3; URL=../index.php");
+echo '<br><a href="../index.php">自動的に移動しない場合はこちら</a>';
+header("Refresh: 1; URL=../index.php");
+echo '<meta http-equiv="refresh"content="1;URL=../index.php">';

@@ -22,5 +22,6 @@ setcookie('_fcMgt4slStage', '' ,time()-1000,"/fcMgt4slStage/",$_SERVER['SERVER_N
 
 
 echo "ログアウトしました。自動的にトップページに戻ります。";
-header("Refresh: 3; URL=../index.php");
-?>
+echo '<br><a href="../index.php">自動的に移動しない場合はこちら</a>';
+header("Refresh: 1; URL=../index.php");
+echo '<meta http-equiv="refresh"content="1;URL=../index.php">';
