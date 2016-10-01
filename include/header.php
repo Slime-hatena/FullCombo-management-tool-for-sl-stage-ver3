@@ -68,6 +68,12 @@ print<<<EOF
 <meta name="twitter:description" content="デレステのフルコン状況を共有できるツールです。他の人のデータを閲覧することもできます。" />
 <meta name="twitter:image" content="http://svr.aki-memo.net/fcMgt4slStage/img/icon/apple-touch-icon.png" />
 
+EOF;
+
+include_once ("include/analytics.php");
+
+print<<<EOF
+
 
 </head>
 

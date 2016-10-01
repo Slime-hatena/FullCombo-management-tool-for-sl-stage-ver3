@@ -22,8 +22,20 @@ if (!$isLogin){
 }
 
 // ランク関連
-$selectRank = array("","","","","","","","");
+$selectRank = array("","","","","","","","","");
 $selectRank[$rank] = "selected";
+
+$selectImas = array("","","","","","","","");
+$i = 1;
+
+foreach ($arrImas as $key => $value) {
+  if ($value === 1){
+    $selectImas[$i] = "checked";
+  }
+  $i++;
+}
+
+
 ?>
 
   <p>アカウントに各データを登録します。
@@ -94,6 +106,7 @@ $selectRank[$rank] = "selected";
         <option value="5" <?php echo $selectRank[5] ?>>A : 敏腕プロデューサー</option>
         <option value="6" <?php echo $selectRank[6] ?>>S : 売れっ子プロデューサー</option>
         <option value="7" <?php echo $selectRank[7] ?>>SS : 超売れっ子プロデューサー</option>
+        <option value="8" <?php echo $selectRank[8] ?>>SSS : アイドルマスター</option>
       </select>
     </div>
 
@@ -102,6 +115,48 @@ $selectRank[$rank] = "selected";
         <br>(120文字)</label>
       <textarea maxlength="120" id="bio" name="bio" placeholder="" rows="3" cols="25"><?php echo str_replace("<br>","",$bio) ?></textarea>
     </div>
+
+    <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+<a style="cursor:pointer; font-size: 1.2em;">▼ SSS : アイドルマスター(クリックで展開)</a>
+</div>
+ 
+<!-- 折りたたみ -->
+<div id="open" style="display:none;clear:both;">
+
+
+  <div class="pure-control-group">
+      <label for="imas1">第１期<br>アイドルマスター</label>
+      <input type="checkbox" id="imas1" name="imas[1]" value="true" <?php echo $selectImas[1] ?>>
+    </div>
+      <!-- 
+        <div class="pure-control-group">
+      <label for="imas2">第２期<br>アイドルマスター</label>
+      <input type="checkbox" id="imas2" name="imas[2]" value="true" <?php echo $selectImas[2] ?>>
+    </div>
+        <div class="pure-control-group">
+      <label for="imas3">第３期<br>アイドルマスター</label>
+      <input type="checkbox" id="imas3" name="imas[3]" value="true" <?php echo $selectImas[3] ?>>
+    </div>
+        <div class="pure-control-group">
+      <label for="imas4">第４期<br>アイドルマスター</label>
+      <input type="checkbox" id="imas4" name="imas[4]" value="true" <?php echo $selectImas[4] ?>>
+    </div>
+        <div class="pure-control-group">
+      <label for="imas5">第５期<br>アイドルマスター</label>
+      <input type="checkbox" id="imas5" name="imas[5]" value="true" <?php echo $selectImas[5] ?>>
+    </div>
+        <div class="pure-control-group">
+      <label for="imas6">第６期<br>アイドルマスター</label>
+      <input type="checkbox" id="imas6" name="imas[6]" value="true" <?php echo $selectImas[6] ?>>
+    </div>
+        <div class="pure-control-group">
+      <label for="imas7">第７期<br>アイドルマスター</label>
+      <input type="checkbox" id="imas7" name="imas[7]" value="true" <?php echo $selectImas[7] ?>>
+    </div>
+
+  -->
+
+</div> <!-- 折りたたみ -->
 
     <div class="pure-controls">
       <button type="submit" class="pure-button pure-button-primary">送信</button>

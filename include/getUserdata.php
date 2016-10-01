@@ -68,8 +68,15 @@ if ($stmt->rowCount() == 1) {
     $grade = $query['grade'];
     $tsreg = $query['tsreg'];
     $tslast = $query['tslast'];
-    
-    
+    $arrImas = array(
+        "imas1" => $query['imas1'],
+        "imas2" => $query['imas2'],
+        "imas3" => $query['imas3'],
+        "imas4" => $query['imas4'],
+        "imas5" => $query['imas5'],
+        "imas6" => $query['imas6'],
+        "imas7" => $query['imas7'],        
+    );
 } elseif ($stmt->rowCount() >= 2){
     echo "何故か複数件のユーザーデータを取得しています。<br>もう一度ログインしてください。";
     $logWrite ="何故か複数件のユーザーデータを取得しています。

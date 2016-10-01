@@ -163,7 +163,7 @@ for ($d = 1; $d <= 4; $d++) {
                 break;
     }
     $a = $slStageMusicList[sprintf('%03d', $i)][$b];
-
+    
     if ($f){
         $fcDifficulty[$b]++;
         $fcLevel[$a]++;
@@ -206,63 +206,69 @@ Twitter を受け取るようにする
 ?>
 
 
-<!DOCTYPE html>
-<html lang="ja">
+  <!DOCTYPE html>
+  <html lang="ja">
 
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?php echo $name ?> - FullComboManagementTool for sl-stage</title>
-    
-<link rel="stylesheet" href="style/reset.css">
-<link rel="stylesheet" href="style/pure-min.css">
-<link rel="stylesheet" href="lib/animatedtablesorter/style.css" type="text/css" />
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      <?php echo $name ?> - FullComboManagementTool for sl-stage</title>
 
-<link rel="stylesheet" href="style/base.css">
-<link rel="stylesheet" type="text/css" href="style/bgTableMusic.css">
-<link rel="stylesheet" type="text/css" href="style/check.css">
-<link rel="stylesheet" type="text/css" href="style/userPage.css">
-<link rel="stylesheet" type="text/css" href="style/table.css">
-<link rel="stylesheet" type="text/css" href="style/bg.css">
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/pure-min.css">
+    <link rel="stylesheet" href="lib/animatedtablesorter/style.css" type="text/css" />
 
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/base.css">
+    <link rel="stylesheet" type="text/css" href="style/bgTableMusic.css">
+    <link rel="stylesheet" type="text/css" href="style/check.css">
+    <link rel="stylesheet" type="text/css" href="style/userPage.css">
+    <link rel="stylesheet" type="text/css" href="style/table.css">
+    <link rel="stylesheet" type="text/css" href="style/bg.css">
 
-<script src='js/jquery.js'></script>
-<script src="js/drawer.js"></script>
-<script type="text/javascript" src="js/checkAll.js"></script>
-<script src="lib/animatedtablesorter/tsort.js"></script>
-<script src="lib/animatedtablesorter/setting.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 
-<!--  Twitter Card  -->
-<meta name="twitter:card" content="photo" />
-<meta name="twitter:site" content="@fcMgt4slStage" />
-<meta name="twitter:title" content="<?php echo $name ?> さんのページ" />
-<meta name="twitter:description" content="デレステのフルコン状況を表にして共有できるサイトです。" />
-<meta name="twitter:image" content="http://svr.aki-memo.net/fcMgt4slStage/twittercardimg/<?php $id ?>.png" />
-<meta name="twitter:url" content="http://svr.aki-memo.net/fcMgt4slStage/user.php?id=<?php $id ?>" />
-</head>
-<body>
+    <script src='js/jquery.js'></script>
+    <script src="js/drawer.js"></script>
+    <script type="text/javascript" src="js/checkAll.js"></script>
+    <script src="lib/animatedtablesorter/tsort.js"></script>
+    <script src="lib/animatedtablesorter/setting.js"></script>
 
-<div class="layerImage">
-<div class="layerTransparent">
+    <!--  Twitter Card  -->
+    <meta name="twitter:card" content="photo" />
+    <meta name="twitter:site" content="@fcMgt4slStage" />
+    <meta name="twitter:title" content="<?php echo $name ?> さんのページ" />
+    <meta name="twitter:description" content="デレステのフルコン状況を表にして共有できるサイトです。" />
+    <meta name="twitter:image" content="http://svr.aki-memo.net/fcMgt4slStage/twittercardimg/<?php $id ?>.png" />
+    <meta name="twitter:url" content="http://svr.aki-memo.net/fcMgt4slStage/user.php?id=<?php $id ?>" />
 
-<div class="layerImage">
-<div class="layerTransparent">
-<div class="frontContents">
-<div id="wrapper">
 
-<header id="header" class="clearfix">
-<h1 class="logo"><span class="br">FullComboManagementTool </span>
+    <?php include_once ("include/analytics.php") ?>
+
+  </head>
+
+  <body>
+
+    <div class="layerImage">
+      <div class="layerTransparent">
+
+        <div class="layerImage">
+          <div class="layerTransparent">
+            <div class="frontContents">
+              <div id="wrapper">
+
+                <header id="header" class="clearfix">
+                  <h1 class="logo"><span class="br">FullComboManagementTool </span>
 <wbr><span class="br">for sl-stage</span></h1>
-    <div class="right">
-<p class="open"><i class="fa fa-bars"></i></p>
-</div>
-</header>
+                  <div class="right">
+                    <p class="open"><i class="fa fa-bars"></i></p>
+                  </div>
+                </header>
 
-<div id="contents">
+                <div id="contents">
 
 
-<?php
+                  <?php
 
 
 
@@ -285,10 +291,18 @@ print<<<EOF
 </div>
 EOF;
 
+
+echo '<div class="idolmaster">';
+foreach ($arrImas as $key => $value) {
+    if ($value === 1){
+        echo '<span class="idolmaster_img"><img src="img/idolmaster/' . $key . '.png" class="idolmaster_icon"></span>';
+    }
+}
+echo '</div>';
+
+
 $a_all = $fcDifficulty["debut"] + $fcDifficulty["regular"] + $fcDifficulty["pro"] + $fcDifficulty["master"];
-
-
-echo '<div class="difficulty">
+echo '<br><div class="difficulty">
 <div class="d_debut"><img src="img/difficulty/debut.png" class="difficulty_img">&nbsp;<span class="difficulty_result">'  . $fcDifficulty["debut"]  . " / " .  $musicAll . '</span><span class="difficulty_per">' . sprintf('%0.2f', $fcDifficulty["debut"] / $musicAll * 100) . '%</span></div>
 <div class="d_regular"><img src="img/difficulty/regular.png" class="difficulty_img">&nbsp;<span class="difficulty_result">' . $fcDifficulty["regular"]  . " / " .  $musicAll . '</span><span class="difficulty_per">' .  sprintf('%0.2f',$fcDifficulty["regular"] / $musicAll * 100 ). '%</span></div>
 <div class="d_pro"><img src="img/difficulty/pro.png" class="difficulty_img">&nbsp;<span class="difficulty_result">' . $fcDifficulty["pro"]  . " / " .  $musicAll . '</span><span class="difficulty_per">' . sprintf('%0.2f', $fcDifficulty["pro"] / $musicAll * 100 ). '%</span></div>
@@ -335,6 +349,12 @@ print<<<EOF
 
 EOF;
 
+//並び替え
+foreach ($slStageMusicList as $key => $value){
+    $sortKey[$key] = $value['order'];
+}
+array_multisort ( $sortKey , SORT_ASC , $slStageMusicList);
+
 $musicLevel = array();  //一時用
 foreach ($slStageMusicList as $key => $value) {
     
@@ -368,8 +388,8 @@ echo  "</table>";
 
 //コピー用URLを生成
 $tweetStr = $name . "さんのフルコンボ曲数は" .
-  $a_all  . "/" .  $musicAll * 4 . "(" . sprintf('%0.2f', $a_all / ($musicAll * 4) * 100) . '%)です。' . 
-  '#fcMgt4slStage #デレステ 詳細→';
+$a_all  . "/" .  $musicAll * 4 . "(" . sprintf('%0.2f', $a_all / ($musicAll * 4) * 100) . '%)です。' .
+'#fcMgt4slStage #デレステ 詳細→';
 
 echo '<div class="Information">共有用URL<br>
 通常 : http://svr.aki-memo.net/fcMgt4slStage/user.php?id=' . $id .  '<br>
@@ -388,3 +408,5 @@ EOF;
 include ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/ad.php");
 
 include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
+
+?>

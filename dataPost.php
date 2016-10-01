@@ -273,7 +273,28 @@ if(isset($_POST['deleteCard']) && $_POST['deleteCard']){
     }else{
         echo '<font color="red">名刺画像削除</font><br>';
     }
-    
+}
+
+// アイドルマスターの処理
+
+$arrImas = $_POST["imas"];
+
+for ($i = 1; $i <= 7; $i++){
+
+if (isset($arrImas[$i]) && $arrImas[$i] === "true" ){
+    // チェック入ってる
+    $state = 1;
+}else{
+    $state = 0;
+}
+    $sql = 'UPDATE fcmgtuser SET imas' . $i . '= :state WHERE id = :id';
+    $stmt=$pdo->prepare($sql);
+    $res=$stmt->execute(array(":state" => $state , ":id" => $userid));
+    if ($res) {
+        echo '<font color="blue">第' . $i . '期</font><br>';
+    }else{
+        echo '<font color="red">第' . $i . '期</font><br>';
+    }
 }
 
 
