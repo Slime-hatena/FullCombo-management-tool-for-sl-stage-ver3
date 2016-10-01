@@ -120,6 +120,8 @@ $levelAll = [ //レベル別曲数
 ];
 $musicAll = 0;  //全曲数
 
+$a_all = $fcDifficulty["debut"] + $fcDifficulty["regular"] + $fcDifficulty["pro"] + $fcDifficulty["master"];
+
 $sql = "SELECT * FROM  `fcmgt4slstage` WHERE  `id` = :id";
 $stmt=$pdo->prepare($sql);
 $res=$stmt->execute(array(":id" =>$id));
@@ -203,72 +205,7 @@ Twitter を受け取るようにする
 
 */
 
-?>
-
-
-  <!DOCTYPE html>
-  <html lang="ja">
-
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-      <?php echo $name ?> - FullComboManagementTool for sl-stage</title>
-
-    <link rel="stylesheet" href="style/reset.css">
-    <link rel="stylesheet" href="style/pure-min.css">
-    <link rel="stylesheet" href="lib/animatedtablesorter/style.css" type="text/css" />
-
-    <link rel="stylesheet" href="style/base.css">
-    <link rel="stylesheet" type="text/css" href="style/bgTableMusic.css">
-    <link rel="stylesheet" type="text/css" href="style/check.css">
-    <link rel="stylesheet" type="text/css" href="style/userPage.css">
-    <link rel="stylesheet" type="text/css" href="style/table.css">
-    <link rel="stylesheet" type="text/css" href="style/bg.css">
-
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-
-    <script src='js/jquery.js'></script>
-    <script src="js/drawer.js"></script>
-    <script type="text/javascript" src="js/checkAll.js"></script>
-    <script src="lib/animatedtablesorter/tsort.js"></script>
-    <script src="lib/animatedtablesorter/setting.js"></script>
-
-    <!--  Twitter Card  -->
-    <meta name="twitter:card" content="photo" />
-    <meta name="twitter:site" content="@fcMgt4slStage" />
-    <meta name="twitter:title" content="<?php echo $name ?> さんのページ" />
-    <meta name="twitter:description" content="デレステのフルコン状況を表にして共有できるサイトです。" />
-    <meta name="twitter:image" content="http://svr.aki-memo.net/fcMgt4slStage/twittercardimg/<?php $id ?>.png" />
-    <meta name="twitter:url" content="http://svr.aki-memo.net/fcMgt4slStage/user.php?id=<?php $id ?>" />
-
-
-    <?php include_once ("include/analytics.php") ?>
-
-  </head>
-
-  <body>
-
-    <div class="layerImage">
-      <div class="layerTransparent">
-
-        <div class="layerImage">
-          <div class="layerTransparent">
-            <div class="frontContents">
-              <div id="wrapper">
-
-                <header id="header" class="clearfix">
-                  <h1 class="logo"><span class="br">FullComboManagementTool </span>
-<wbr><span class="br">for sl-stage</span></h1>
-                  <div class="right">
-                    <p class="open"><i class="fa fa-bars"></i></p>
-                  </div>
-                </header>
-
-                <div id="contents">
-
-
-                  <?php
+include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/header.php");
 
 
 
@@ -294,14 +231,14 @@ EOF;
 
 echo '<div class="idolmaster">';
 foreach ($arrImas as $key => $value) {
-    if ($value === 1){
+    if ($value == 1){
         echo '<span class="idolmaster_img"><img src="img/idolmaster/' . $key . '.png" class="idolmaster_icon"></span>';
     }
 }
 echo '</div>';
 
 
-$a_all = $fcDifficulty["debut"] + $fcDifficulty["regular"] + $fcDifficulty["pro"] + $fcDifficulty["master"];
+
 echo '<br><div class="difficulty">
 <div class="d_debut"><img src="img/difficulty/debut.png" class="difficulty_img">&nbsp;<span class="difficulty_result">'  . $fcDifficulty["debut"]  . " / " .  $musicAll . '</span><span class="difficulty_per">' . sprintf('%0.2f', $fcDifficulty["debut"] / $musicAll * 100) . '%</span></div>
 <div class="d_regular"><img src="img/difficulty/regular.png" class="difficulty_img">&nbsp;<span class="difficulty_result">' . $fcDifficulty["regular"]  . " / " .  $musicAll . '</span><span class="difficulty_per">' .  sprintf('%0.2f',$fcDifficulty["regular"] / $musicAll * 100 ). '%</span></div>

@@ -9,7 +9,7 @@ user.phpのみ使用していない。
 
 */
 
-$Version = "ver.160911 (3.0.1)";
+$Version = "ver.161001 (3.0.2)";
 $adViewCount = 0;
 
 //ログイン情報を取る
@@ -62,13 +62,23 @@ print<<<EOF
 <!-- Android Chrome -->
 <link rel="icon" sizes="120x120" href="img/icon/apple-touch-icon.png">
 
+
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@fcMgt4slStage" />
-<meta name="twitter:title" content="FullComboManagementTool for sl-stage" />
-<meta name="twitter:description" content="デレステのフルコン状況を共有できるツールです。他の人のデータを閲覧することもできます。" />
 <meta name="twitter:image" content="http://svr.aki-memo.net/fcMgt4slStage/img/icon/apple-touch-icon.png" />
 
 EOF;
+// twitterCard
+ if(strstr($_SERVER['REQUEST_URI'],'?',true) == "/fcMgt4slStage/user.php"){
+	 // ユーザーページ
+	 echo '<meta name="twitter:title" content="' . $name . 'さんのページ" />
+<meta name="twitter:description" content="フルコン楽曲数: ' .  $a_all  . "/" .  $musicAll * 4 . ' 達成率: ' . sprintf('%0.2f', $a_all / ($musicAll * 4) * 100) . '%" />';
+ }else{
+	 echo '<meta name="twitter:title" content="FullComboManagementTool for sl-stage" />
+<meta name="twitter:description" content="デレステのフルコン状況を共有できるツールです。他の人のデータを閲覧することもできます。" />';
+ }
+
+
 
 include_once ("include/analytics.php");
 
