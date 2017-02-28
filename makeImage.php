@@ -1,4 +1,6 @@
 <?php
+echo "未公開ページです";
+exit();
 
 var_dump($_POST);
 

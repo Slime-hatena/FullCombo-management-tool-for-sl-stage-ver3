@@ -4,6 +4,12 @@
 include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/header.php");
 
 print<<<EOF
+準備中・・・。公開まで暫くお待ち下さい。
+EOF;
+
+/*
+
+print<<<EOF
 
 <form class="pure-form pure-form-aligned" action="makeImage.php" id="main" method="post" name="main" enctype="multipart/form-data">
 
@@ -29,5 +35,6 @@ print<<<EOF
   </form>
 
 EOF;
+*/
 
 include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/footer.php");
