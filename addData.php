@@ -128,11 +128,11 @@ foreach ($arrImas as $key => $value) {
       <label for="imas1">第１期<br>アイドルマスター</label>
       <input type="checkbox" id="imas1" name="imas[1]" value="true" <?php echo $selectImas[1] ?>>
     </div>
-      <!-- 
         <div class="pure-control-group">
       <label for="imas2">第２期<br>アイドルマスター</label>
       <input type="checkbox" id="imas2" name="imas[2]" value="true" <?php echo $selectImas[2] ?>>
     </div>
+          <!-- 
         <div class="pure-control-group">
       <label for="imas3">第３期<br>アイドルマスター</label>
       <input type="checkbox" id="imas3" name="imas[3]" value="true" <?php echo $selectImas[3] ?>>
@@ -192,14 +192,27 @@ foreach ($arrImas as $key => $value) {
 
         <?php
 
-// 楽曲の並び替え処理
+//並び替え 並び替えると勝手に添字が振り直されるので 一旦keyをstringに変えたい
+$newArr = array();
 foreach ($arr as $key => $value){
     $sortKey[$key] = $value['order'];
+    // keyに'_'を付与
+    $newArr[$key . "_"] = $value;
 }
-array_multisort ( $sortKey , SORT_ASC , $arr);
+$arr = $newArr;
+array_multisort ( $sortKey , SORT_ASC, SORT_NUMERIC , $arr);
+// intに戻す かなり冗長だけど取り急ぎ
+$newArr = array();
+foreach ($arr as $key => $value) {
+    $newArr[str_replace('_', '', $key)] = $value;
+}
+$arr = $newArr;
 
 
 foreach ($arr as $key => $value) {
+      //idが少なかったら３桁0埋めする
+    $key = sprintf('%03d', $key);
+    
     $k = $key . "_1," . $key . "_2," . $key . "_3," . $key . "_4";
     $sql = "SELECT " . $k . " FROM  `fcmgt4slstage` WHERE  `id` = :id";
     $stmt=$pdo->prepare($sql);

@@ -9,6 +9,14 @@ print<<<EOF
 ソース的な更新履歴は<a href="https://github.com/Slime-hatena/FullCombo-management-tool-for-sl-stage-ver3" target="_blank">github</a>にてどうぞ。</p>
 
 
+<h3>ver.161111 (3.0.3)</h3>
+<p> なかなか固まった時間が取れず実装したい機能も山積みで・・・<br>
+ユーザーの皆様には申し訳ない限りです。<br>
+アイドルマスターの第二期を選択できるように追加しました。<br>
+...<br>
+ところで To my darling...の追加はいつになりそうですかね？
+</p>
+
 <h3>ver.161001 (3.0.2)</h3>
 <p>アイドルマスター争奪戦お疲れ様でした！！！<br>
 いやー厳しい戦いでしたね！！！<br>

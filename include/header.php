@@ -9,7 +9,7 @@ user.phpのみ使用していない。
 
 */
 
-$Version = "ver.161001 (3.0.2)";
+$Version = "ver.161111 (3.0.3)";
 $adViewCount = 0;
 
 //ログイン情報を取る

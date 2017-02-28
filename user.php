@@ -1,6 +1,4 @@
 <?php
-$Version = "ver.1608xx (3.0.0 Alpha)";
-$adViewCount = 0;
 
 //ログイン情報を取る
 require_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/twitter/twitterLoader.php");
@@ -57,7 +55,17 @@ $json_music = file_get_contents("../slStageMusicDatabase/music.json");
 $json_music = mb_convert_encoding($json_music, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 $slStageMusicList = json_decode($json_music, true);
 
-
+/*
+foreach ($slStageMusicList as $key => $value) {
+    echo gettype($key) . "<br>";
+    if(gettype($key) == "integer"){
+        echo "変換" . $key;
+        $slStageMusicList[(string)$key] = $slStageMusicList[$key];
+        unset($slStageMusicList[$key]);
+    }
+}
+// ここを記述した
+*/
 
 // 各難易度ごとのフルコン曲算出
 $fcDifficulty = [   //フルコンした難易度別曲数
@@ -120,7 +128,7 @@ $levelAll = [ //レベル別曲数
 ];
 $musicAll = 0;  //全曲数
 
-$a_all = $fcDifficulty["debut"] + $fcDifficulty["regular"] + $fcDifficulty["pro"] + $fcDifficulty["master"];
+
 
 $sql = "SELECT * FROM  `fcmgt4slstage` WHERE  `id` = :id";
 $stmt=$pdo->prepare($sql);
@@ -164,16 +172,16 @@ for ($d = 1; $d <= 4; $d++) {
                 continue;
                 break;
     }
-    $a = $slStageMusicList[sprintf('%03d', $i)][$b];
+    $a = $slStageMusicList[$i][$b];
     
     if ($f){
         $fcDifficulty[$b]++;
         $fcLevel[$a]++;
-        $doFc[sprintf('%03d', $i)][$d] = 'do_fc';
+        $doFc[$i][$d] = 'do_fc';
     }elseif ($mn){
-        $doFc[sprintf('%03d', $i)][$d] = 'no_play';
+        $doFc[$i][$d] = 'no_play';
     }else{
-        $doFc[sprintf('%03d', $i)][$d] = '';
+        $doFc[$i][$d] = '';
     }
     $levelAll[$a]++;
     $i++;
@@ -204,6 +212,8 @@ $tslast;
 Twitter を受け取るようにする
 
 */
+
+$a_all = $fcDifficulty["debut"] + $fcDifficulty["regular"] + $fcDifficulty["pro"] + $fcDifficulty["master"];
 
 include_once ($_SERVER['DOCUMENT_ROOT'] . "/fcMgt4slStage/include/header.php");
 
@@ -286,21 +296,36 @@ print<<<EOF
 
 EOF;
 
-//並び替え
+//並び替え 並び替えると勝手に添字が振り直されるので 一旦keyをstringに変えたい
+$newArr = array();
 foreach ($slStageMusicList as $key => $value){
     $sortKey[$key] = $value['order'];
+    // keyに'_'を付与
+    $newArr[$key . "_"] = $value;
 }
-array_multisort ( $sortKey , SORT_ASC , $slStageMusicList);
-
-$musicLevel = array();  //一時用
+$slStageMusicList = $newArr;
+array_multisort ( $sortKey , SORT_ASC, SORT_NUMERIC , $slStageMusicList);
+// intに戻す かなり冗長だけど取り急ぎ
+$newArr = array();
 foreach ($slStageMusicList as $key => $value) {
-    
-    
-    
+    $newArr[str_replace('_', '', $key)] = $value;
+}
+$slStageMusicList = $newArr;
+
+
+
+foreach ($slStageMusicList as $key => $value) {
+
     print<<<EOF
     
     <tr>
-    <td class="title" id="bg{$key}">
+
+EOF;
+
+    echo '<td class="title" id="bg' . sprintf('%03d', $key) .'">';
+
+    print<<<EOF
+
     <div class="tableWrapper">{$value['name']}</div>
     </td>
     <td class="box_cell {$doFc[$key][1]}">
